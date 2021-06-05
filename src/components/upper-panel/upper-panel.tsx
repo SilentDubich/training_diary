@@ -1,9 +1,11 @@
 import React, {FC} from "react";
-import StylesUpperPanel from "./upper-panel.module.css";
+import Styles from "./upper-panel.module.css";
 
 
 export const UpperPanel: FC<any> = props => {
 	return (
-		<div className={StylesUpperPanel.upper_panel}></div>
+		<div className={Styles.upper_panel}>
+			<div className={Styles.enter}>Войти</div>
+		</div>
 	)
 }

@@ -1,6 +1,7 @@
 .navigation_content_container {
 	display: flex;
-	align-items: center;
 	width: 100%;
 	height: 100%;
+	box-sizing: border-box;
+	/*background: #E7E7E7;*/
 }

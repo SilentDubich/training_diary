@@ -1,0 +1,28 @@
+.header {
+	width: 100%;
+	height: 60px;
+	min-height: 60px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.header_title,
+.header_add {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	font-size: 24px;
+}
+
+.header_add:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.items {
+	overflow: auto;
+}
+
+.items:last-child {
+	margin: 0;
+}
