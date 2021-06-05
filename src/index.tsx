@@ -4,14 +4,15 @@ import './index.css';
 import { App } from './App';
 import {BrowserRouter, HashRouter} from "react-router-dom";
 import {Provider} from "react-redux";
+import {store} from "./data-base/store";
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-	<HashRouter>
-		{/*<Provider store={null}>*/}
+	<BrowserRouter>
+		<Provider store={store}>
 			<App/>
-		{/*</Provider>*/}
-	</HashRouter>,
+		</Provider>
+	</BrowserRouter>,
   document.getElementById('root')
 );
 
