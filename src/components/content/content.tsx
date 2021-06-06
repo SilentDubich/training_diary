@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import {Redirect, Route, Switch } from "react-router-dom";
 import Styles from "./content.module.css"
 import {Profile} from "./profile/profile";
-import {Parameters} from "./parameters/parameters";
+import {ParametersContainer} from "./parameters/parameters";
 
 
 
@@ -10,7 +10,7 @@ type PropsType = any;
 
 export const Content: FC<PropsType> = props => {
 	const ProfileComponent = () => <Profile/>;
-	const ParametersComponent = () => <Parameters/>;
+	const ParametersComponent = () => <ParametersContainer/>;
 	const Training = () => <div>Training</div>;
 	const Targets = () => <div>Targets</div>;
 	return (

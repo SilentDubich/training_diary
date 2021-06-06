@@ -1,8 +1,11 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware from 'redux-thunk'
+import {parametersReducer} from "./reducers/parametersReducer";
 
 const allReduces = combineReducers(
-	{}
+	{
+		parametersReducer
+	}
 );
 
 type AllReducersType = typeof allReduces

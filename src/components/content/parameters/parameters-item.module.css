@@ -6,4 +6,24 @@
 	min-height: 100px;
 	box-shadow: 0 0 4px rgba(0, 0, 0, .5);
 	margin: 0 0 10px 0;
+	box-sizing: border-box;
+	padding: 0 10px;
+}
+
+.parameters {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.parameter {
+	display: flex;
+	align-items: center;
+	margin: 0 10px 0 0;
+	height: 30px;
+	min-height: 30px;
+}
+
+.parameter_title {
+	margin: 0 5px 0 0;
 }
