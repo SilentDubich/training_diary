@@ -2,9 +2,23 @@ import React, {ComponentType, FC} from "react";
 import Styles from "./parameters-item.module.css"
 import { ItemType } from "../../../data-base/reducers/parametersReducer";
 
-export const ParametersItem: FC<ItemType> = ({ createDatetime, weight, percentFat, percentMuscles }) => {
-	const muscles: number = +(weight * (percentMuscles / 100)).toFixed(1);
-	const fat: number = +(weight * (percentFat / 100)).toFixed(1);
+export const ParametersItem: FC<ItemType> = ({
+	createDatetime,
+	weight,
+	percentFat,
+	percentMuscles,
+	percentWater,
+	widthBelly,
+	widthBiceps,
+	widthCaviar,
+	widthChest,
+	widthForearm,
+	widthHip,
+	widthNeck,
+	widthWaist
+}) => {
+	const muscles: number = weight && percentMuscles ? +(weight * (percentMuscles / 100)).toFixed(1) : 0;
+	const fat: number = weight && percentFat ? +(weight * (percentFat / 100)).toFixed(1) : 0;
 	return (
 		<div className={Styles.container}>
 			<div className={Styles.parameter}>
@@ -31,6 +45,43 @@ export const ParametersItem: FC<ItemType> = ({ createDatetime, weight, percentFa
 				<div className={Styles.parameter}>
 					<div className={Styles.parameter_title}>Мышцы(кг):</div>
 					<div>{ muscles };</div>
+				</div>
+
+				<div className={Styles.parameter}>
+					<div className={Styles.parameter_title}>Вода(%):</div>
+					<div>{ percentWater };</div>
+				</div>
+				<div className={Styles.parameter}>
+					<div className={Styles.parameter_title}>Складка на животе(мм):</div>
+					<div>{ widthBelly };</div>
+				</div>
+				<div className={Styles.parameter}>
+					<div className={Styles.parameter_title}>Объем бицепса(см):</div>
+					<div>{ widthBiceps };</div>
+				</div>
+				<div className={Styles.parameter}>
+					<div className={Styles.parameter_title}>Объем икр(см):</div>
+					<div>{ widthCaviar };</div>
+				</div>
+				<div className={Styles.parameter}>
+					<div className={Styles.parameter_title}>Объем груди(см):</div>
+					<div>{ widthChest };</div>
+				</div>
+				<div className={Styles.parameter}>
+					<div className={Styles.parameter_title}>Объем предплечья(см):</div>
+					<div>{ widthForearm };</div>
+				</div>
+				<div className={Styles.parameter}>
+					<div className={Styles.parameter_title}>Объем бедра(см):</div>
+					<div>{ widthHip };</div>
+				</div>
+				<div className={Styles.parameter}>
+					<div className={Styles.parameter_title}>Объем шеи(см):</div>
+					<div>{ widthNeck };</div>
+				</div>
+				<div className={Styles.parameter}>
+					<div className={Styles.parameter_title}>Ширина талии(см):</div>
+					<div>{ widthWaist };</div>
 				</div>
 			</div>
 		</div>

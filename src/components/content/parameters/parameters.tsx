@@ -11,9 +11,39 @@ type PropsType = {
 	items: Array<ItemType>
 }
 
-const Parameters: FC<PropsType> = ({ items }) => {
+const Parameters: FC<PropsType> = ({items}) => {
 	const parametersItems = items.map(
-		({ createDatetime, weight, percentFat, percentMuscles }) => <ParametersItem createDatetime={createDatetime} weight={weight} percentFat={percentFat} percentMuscles={percentMuscles}/>
+		({
+			 createDatetime,
+			 weight,
+			 percentFat,
+			 percentMuscles,
+			 percentWater,
+			 widthBelly,
+			 widthBiceps,
+			 widthCaviar,
+			 widthChest,
+			 widthForearm,
+			 widthHip,
+			 widthNeck,
+			 widthWaist
+		}) => {
+			return <ParametersItem
+				createDatetime={createDatetime}
+				weight={weight}
+				percentFat={percentFat}
+				percentMuscles={percentMuscles}
+				percentWater={percentWater}
+				widthBelly={widthBelly}
+				widthBiceps={widthBiceps}
+				widthCaviar={widthCaviar}
+				widthChest={widthChest}
+				widthForearm={widthForearm}
+				widthHip={widthHip}
+				widthNeck={widthNeck}
+				widthWaist={widthWaist}
+			/>
+		}
 	)
 	return (
 		<div>
@@ -22,7 +52,7 @@ const Parameters: FC<PropsType> = ({ items }) => {
 				<div className={Styles.header_add}>Добавить измерение</div>
 			</div>
 			<div className={Styles.items}>
-				{ parametersItems }
+				{parametersItems}
 			</div>
 		</div>
 	)
