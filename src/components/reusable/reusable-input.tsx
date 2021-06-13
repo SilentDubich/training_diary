@@ -13,7 +13,6 @@ export const ReusableInput: FC<PropsType> = ({ updateValue, value, type }) => {
 		let value = ref.current?.value;
 		if (!value) value = '';
 		updateValue(value);
-		console.log(value)
 	}
 	return (
 		<input className={`${ Styles.container }`} type={type} value={value} onInput={changeValue} ref={ref}/>

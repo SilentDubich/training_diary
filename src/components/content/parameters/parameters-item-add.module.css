@@ -41,20 +41,45 @@
 	justify-content: center;
 }
 
-.parameters {
+.content {
+	height: calc(100% - 60px);
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
 	padding: 20px;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, 225px);
-	grid-gap: 20px 10px;
+	box-sizing: border-box;
+}
+
+.parameters {
 	width: 100%;
 	box-sizing: border-box;
+	flex-grow: 1;
 }
 
 .parameter {
 	display: flex;
 	align-items: center;
+	margin: 0 0 20px 0;
 }
 
 .parameter_title {
+	width: 15%;
 	margin: 0 5px 0 0;
+}
+
+.save {
+	padding: 0 20px;
+}
+
+.save_btn {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	background: #190053;
+	color: #fff;
+	height: 40px;
+	min-height: 40px;
+	border-radius: 24px;
 }

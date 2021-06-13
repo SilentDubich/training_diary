@@ -16,13 +16,13 @@ export type ItemType = {
 	percentMuscles: number | null, // Процент мышц
 	percentWater: number | null, // Процент воды
 	widthBelly: number | null, // Складка на животе мм
-	widthNeck: number | null, // Объем шеи см
-	widthChest: number | null, // Объем груди см
-	widthWaist: number | null, // Ширина талии см
-	widthForearm: number | null, // Объем предплечья см
-	widthBiceps: number | null, // Объем бицепса см
-	widthHip: number | null, // Объем бедра см
-	widthCaviar: number | null // Объем икрс см
+	widthNeck: number | null, // Объем шеи(см)
+	widthChest: number | null, // Объем груди(см)
+	widthWaist: number | null, // Ширина талии(см)
+	widthForearm: number | null, // Объем предплечья(см)
+	widthBiceps: number | null, // Объем бицепса(см)
+	widthHip: number | null, // Объем бедра(см)
+	widthCaviar: number | null // Объем икр(см)
 };
 
 const parametersDefaultState = {
