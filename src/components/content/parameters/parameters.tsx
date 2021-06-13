@@ -1,10 +1,12 @@
-import React, {ComponentType, FC} from "react";
+import React, {ComponentType, FC, useState} from "react";
 import Styles from "./parameters.module.css"
 import {ParametersItem} from "./parameters-item";
 import {AppStateType} from "../../../data-base/store";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {ItemType} from "../../../data-base/reducers/parametersReducer";
+import {Modal} from "../../popup";
+import {ParametersItemAdd} from "./parameters-item-add";
 
 
 type PropsType = {
@@ -14,6 +16,7 @@ type PropsType = {
 const Parameters: FC<PropsType> = ({items}) => {
 	const parametersItems = items.map(
 		({
+			 id,
 			 createDatetime,
 			 weight,
 			 percentFat,
@@ -29,6 +32,8 @@ const Parameters: FC<PropsType> = ({items}) => {
 			 widthWaist
 		}) => {
 			return <ParametersItem
+				key={id}
+				id={id}
 				createDatetime={createDatetime}
 				weight={weight}
 				percentFat={percentFat}
@@ -45,16 +50,24 @@ const Parameters: FC<PropsType> = ({items}) => {
 			/>
 		}
 	)
+	let [ isAdd, setIsAdd ] = useState<boolean>(false);
 	return (
-		<div>
+		<>
 			<div className={Styles.header}>
 				<div className={Styles.header_title}>Мои измерения</div>
-				<div className={Styles.header_add}>Добавить измерение</div>
+				<div className={Styles.header_add} onClick={() => setIsAdd(true)}>Добавить измерение</div>
 			</div>
 			<div className={Styles.items}>
 				{parametersItems}
 			</div>
-		</div>
+			{
+				isAdd &&
+				<Modal>
+					<ParametersItemAdd setIsAdd={setIsAdd}/>
+				</Modal>
+			}
+
+		</>
 	)
 }
 

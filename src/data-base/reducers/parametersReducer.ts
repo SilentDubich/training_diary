@@ -9,6 +9,7 @@ type ParametersActionType = InferActionsTypes<typeof parametersActions>;
 export type ParametersThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ParametersActionType>;
 
 export type ItemType = {
+	id: number,
 	createDatetime: string, // Дата создания
 	weight: number | null, // Вес
 	percentFat: number | null, // Процент жира
@@ -27,6 +28,7 @@ export type ItemType = {
 const parametersDefaultState = {
 	items: [
 		{
+			id: 0,
 			createDatetime: "2021-06-06",
 			weight: 78.9,
 			percentFat: 23,

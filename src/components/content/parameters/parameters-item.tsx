@@ -46,7 +46,6 @@ export const ParametersItem: FC<ItemType> = ({
 					<div className={Styles.parameter_title}>Мышцы(кг):</div>
 					<div>{ muscles };</div>
 				</div>
-
 				<div className={Styles.parameter}>
 					<div className={Styles.parameter_title}>Вода(%):</div>
 					<div>{ percentWater };</div>
