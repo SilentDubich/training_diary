@@ -12,4 +12,32 @@
 	border-radius: 12px;
 	overflow: hidden;
 	box-shadow: 0 0 4px rgba(0, 0, 0, .25);
+	padding: 10px 0;
+	box-sizing: border-box;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 60px;
+	min-height: 60px;
+	border-bottom: 1px solid #e7e7e7;
+	padding: 0 20px;
+}
+
+.header_title {
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.header_close {
+	user-select: none;
+	cursor: pointer;
+	font-size: 24px;
+	width: 40px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

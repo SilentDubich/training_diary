@@ -62,7 +62,7 @@ const Parameters: FC<PropsType> = ({items}) => {
 			</div>
 			{
 				isAdd &&
-				<Modal>
+				<Modal isShowPopup={setIsAdd}>
 					<ParametersItemAdd setIsAdd={setIsAdd}/>
 				</Modal>
 			}
