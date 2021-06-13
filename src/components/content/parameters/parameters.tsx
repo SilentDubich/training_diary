@@ -66,7 +66,6 @@ const Parameters: FC<PropsType> = ({items}) => {
 					<ParametersItemAdd setIsAdd={setIsAdd}/>
 				</Modal>
 			}
-
 		</>
 	)
 }

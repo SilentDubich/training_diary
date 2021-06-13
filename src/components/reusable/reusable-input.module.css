@@ -1,0 +1,9 @@
+.container {
+	width: 100%;
+	outline: none;
+	border: 1px solid #c4c4c4;
+	box-shadow: 0 0 4px rgba(0, 0, 0, .16);
+	border-radius: 12px;
+	box-sizing: border-box;
+	padding: 5px 10px;
+}
