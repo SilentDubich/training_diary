@@ -2,7 +2,13 @@ import React, {ComponentType, FC} from "react";
 import Styles from "./parameters-item.module.css"
 import { ItemType } from "../../../data-base/reducers/parametersReducer";
 
-export const ParametersItem: FC<ItemType> = ({
+
+type PropsType = {
+	deleteParameterItemThunk: (id: number) => void
+}
+
+export const ParametersItem: FC<ItemType & PropsType> = ({
+	id,
 	createDatetime,
 	weight,
 	percentFat,
@@ -15,7 +21,8 @@ export const ParametersItem: FC<ItemType> = ({
 	widthForearm,
 	widthHip,
 	widthNeck,
-	widthWaist
+	widthWaist,
+	deleteParameterItemThunk
 }) => {
 	const muscles: number = weight && percentMuscles ? +(weight * (percentMuscles / 100)).toFixed(1) : 0;
 	const fat: number = weight && percentFat ? +(weight * (percentFat / 100)).toFixed(1) : 0;
@@ -23,7 +30,8 @@ export const ParametersItem: FC<ItemType> = ({
 		<div className={Styles.container}>
 			<div className={Styles.parameter}>
 				<div className={Styles.parameter_title}>Дата измерения:</div>
-				<div>{ createDatetime }</div>
+				<div className={Styles.datetime}>{ createDatetime }</div>
+				<div className={Styles.delete} onClick={() => deleteParameterItemThunk(id)}>Удалить</div>
 			</div>
 			<div className={Styles.parameters}>
 				<div className={Styles.parameter}>

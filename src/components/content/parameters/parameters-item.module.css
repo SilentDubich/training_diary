@@ -3,12 +3,29 @@
 	background: #e7e7e7;
 	border: 1px solid #c4c4c4;
 	border-radius: 6px;
-	height: 100px;
 	min-height: 100px;
+	max-height: 200px;
 	box-shadow: 0 0 4px rgba(0, 0, 0, .5);
 	margin: 0 0 10px 0;
 	box-sizing: border-box;
 	padding: 0 10px;
+}
+
+.container:hover .delete {
+	display: block;
+}
+
+.datetime {
+	margin: 0 auto 0 0;
+}
+
+.delete {
+	display: none;
+	cursor: pointer;
+}
+
+.delete:hover {
+	text-decoration: underline;
 }
 
 .parameters {

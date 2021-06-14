@@ -26,3 +26,8 @@
 .items:last-child {
 	margin: 0;
 }
+
+.empty_list {
+	text-align: center;
+	font-size: 32px;
+}

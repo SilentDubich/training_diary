@@ -2,8 +2,6 @@ import React, {ComponentType, FC, useState} from "react";
 import Styles from "./parameters-item-add.module.css"
 import {ReusableInput} from "../../reusable/reusable-input";
 import {ItemType} from "../../../data-base/reducers/parametersReducer";
-import {compose} from "redux";
-import {connect} from "react-redux";
 
 
 type PropsType = {
@@ -27,6 +25,8 @@ export const ParametersItemAdd: FC<PropsType> = ({ setIsAdd, addParameterItemThu
 	let [ widthCaviar, setWidthCaviar ] = useState<number>(0);
 	const saveParameters = () => {
 		const data: ItemType = {
+			id: -Infinity,
+			createDatetime: '1970-01-01',
 			weight,
 			percentFat,
 			percentMuscles,

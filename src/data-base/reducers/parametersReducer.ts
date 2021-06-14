@@ -3,7 +3,7 @@ import {ThunkAction} from "redux-thunk";
 
 export const parametersActions = {
 	addParameterItem: (data: ItemType) => ({ type: 'parametersReducer/addParameterItem', data } as const),
-	deleteParameterItem: (id: number) => ({ type: 'parametersReducer/deleteParameterItem' } as const)
+	deleteParameterItem: (id: number) => ({ type: 'parametersReducer/deleteParameterItem', id } as const)
 };
 
 type ParametersActionType = InferActionsTypes<typeof parametersActions>;
@@ -15,9 +15,15 @@ export const addParameterItemThunk = (data: ItemType): ParametersThunkType => {
 	}
 };
 
+export const deleteParameterItemThunk = (id: number): ParametersThunkType => {
+	return async (dispatch) => {
+		dispatch(parametersActions.deleteParameterItem(id));
+	}
+};
+
 export type ItemType = {
-	id?: number,
-	createDatetime?: string | Date, // Дата создания
+	id: number,
+	createDatetime: string, // Дата создания
 	weight: number | null, // Вес
 	percentFat: number | null, // Процент жира
 	percentMuscles: number | null, // Процент мышц
@@ -36,7 +42,7 @@ const parametersDefaultState = {
 	items: [
 		{
 			id: 0,
-			createDatetime: "2021-06-06",
+			createDatetime: '2021-06-06',
 			weight: 78.9,
 			percentFat: 23,
 			percentMuscles: 44,
@@ -58,14 +64,21 @@ type ParametersDefaultStateType = typeof parametersDefaultState;
 
 
 export const parametersReducer = (state = parametersDefaultState, action: ParametersActionType): ParametersDefaultStateType => {
+	const { items, maxId } = state;
 	switch (action.type) {
 		case "parametersReducer/addParameterItem":
-			const { items, maxId } = state;
 			const { data } = action;
 			const newId: number = maxId + 1;
 			data.id = newId;
-			data.createDatetime = "2021-06-06";
+			data.createDatetime = '2021-06-06';
 			return { ...state, items: [ data, ...items ], maxId: newId };
+		case "parametersReducer/deleteParameterItem":
+			const { id } = action;
+			const itemsCopy = [ ...items ];
+			const indexDeletingItem = itemsCopy.findIndex(itemCopy => itemCopy.id === id);
+			itemsCopy.splice(indexDeletingItem, 1);
+			debugger
+			return { ...state, items: itemsCopy };
 		default:
 			return state;
 	}

@@ -4,17 +4,18 @@ import {ParametersItem} from "./parameters-item";
 import {AppStateType} from "../../../data-base/store";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {addParameterItemThunk, ItemType} from "../../../data-base/reducers/parametersReducer";
+import {addParameterItemThunk, deleteParameterItemThunk, ItemType} from "../../../data-base/reducers/parametersReducer";
 import {Modal} from "../../popup";
 import {ParametersItemAdd} from "./parameters-item-add";
 
 
 type PropsType = {
 	items: Array<ItemType>,
-	addParameterItemThunk: (data: ItemType) => void
+	addParameterItemThunk: (data: ItemType) => void,
+	deleteParameterItemThunk: (id: number) => void
 }
 
-const Parameters: FC<PropsType> = ({items, addParameterItemThunk}) => {
+const Parameters: FC<PropsType> = ({items, addParameterItemThunk, deleteParameterItemThunk}) => {
 	const parametersItems = items.map(
 		({
 			 id,
@@ -33,6 +34,7 @@ const Parameters: FC<PropsType> = ({items, addParameterItemThunk}) => {
 			 widthWaist
 		}) => {
 			return <ParametersItem
+				deleteParameterItemThunk={deleteParameterItemThunk}
 				key={id}
 				id={id}
 				createDatetime={createDatetime}
@@ -59,6 +61,7 @@ const Parameters: FC<PropsType> = ({items, addParameterItemThunk}) => {
 				<div className={Styles.header_add} onClick={() => setIsAdd(true)}>Добавить измерение</div>
 			</div>
 			<div className={Styles.items}>
+				{parametersItems.length === 0 && <div className={Styles.empty_list}>Список пуст</div>}
 				{parametersItems}
 			</div>
 			{
@@ -78,5 +81,5 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export const ParametersContainer = compose<ComponentType>(
-	connect(mapStateToProps, { addParameterItemThunk })
+	connect(mapStateToProps, { addParameterItemThunk, deleteParameterItemThunk })
 )(Parameters)
