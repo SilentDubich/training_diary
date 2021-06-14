@@ -6,12 +6,12 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {addParameterItemThunk, deleteParameterItemThunk, ItemType} from "../../../data-base/reducers/parametersReducer";
 import {Modal} from "../../popup";
-import {ParametersItemAdd} from "./parameters-item-add";
+import {ParametersItemAdd} from "./parameters-item-add/parameters-item-add";
 
 
 type PropsType = {
 	items: Array<ItemType>,
-	addParameterItemThunk: (data: ItemType) => void,
+	addParameterItemThunk: (data: ItemType, mode: 'ADD' | 'EDIT') => void,
 	deleteParameterItemThunk: (id: number) => void
 }
 
@@ -34,6 +34,7 @@ const Parameters: FC<PropsType> = ({items, addParameterItemThunk, deleteParamete
 			 widthWaist
 		}) => {
 			return <ParametersItem
+				addParameterItemThunk={addParameterItemThunk}
 				deleteParameterItemThunk={deleteParameterItemThunk}
 				key={id}
 				id={id}
@@ -67,7 +68,7 @@ const Parameters: FC<PropsType> = ({items, addParameterItemThunk, deleteParamete
 			{
 				isAdd &&
 				<Modal isShowPopup={setIsAdd}>
-					<ParametersItemAdd addParameterItemThunk={addParameterItemThunk} setIsAdd={setIsAdd}/>
+					<ParametersItemAdd addParameterItemThunk={addParameterItemThunk} setIsAdd={setIsAdd} mode={"ADD"}/>
 				</Modal>
 			}
 		</>

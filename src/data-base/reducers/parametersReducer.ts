@@ -3,15 +3,17 @@ import {ThunkAction} from "redux-thunk";
 
 export const parametersActions = {
 	addParameterItem: (data: ItemType) => ({ type: 'parametersReducer/addParameterItem', data } as const),
+	editParameterItem: (data: ItemType) => ({ type: 'parametersReducer/editParameterItem', data } as const),
 	deleteParameterItem: (id: number) => ({ type: 'parametersReducer/deleteParameterItem', id } as const)
 };
 
 type ParametersActionType = InferActionsTypes<typeof parametersActions>;
 export type ParametersThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ParametersActionType>;
 
-export const addParameterItemThunk = (data: ItemType): ParametersThunkType => {
+export const addParameterItemThunk = (data: ItemType, mode: 'ADD' | 'EDIT'): ParametersThunkType => {
 	return async (dispatch) => {
-		dispatch(parametersActions.addParameterItem(data));
+		if (mode === 'ADD') dispatch(parametersActions.addParameterItem(data));
+		else if (mode === 'EDIT') dispatch(parametersActions.editParameterItem(data));
 	}
 };
 
@@ -41,7 +43,7 @@ export type ItemType = {
 const parametersDefaultState = {
 	items: [
 		{
-			id: 0,
+			id: 1,
 			createDatetime: '2021-06-06',
 			weight: 78.9,
 			percentFat: 23,
@@ -57,7 +59,7 @@ const parametersDefaultState = {
 			widthCaviar: 20
 		}
 	] as Array<ItemType>,
-	maxId: 0
+	maxId: 1
 };
 
 type ParametersDefaultStateType = typeof parametersDefaultState;
@@ -65,20 +67,28 @@ type ParametersDefaultStateType = typeof parametersDefaultState;
 
 export const parametersReducer = (state = parametersDefaultState, action: ParametersActionType): ParametersDefaultStateType => {
 	const { items, maxId } = state;
+	const itemsCopy = [ ...items ];
 	switch (action.type) {
 		case "parametersReducer/addParameterItem":
-			const { data } = action;
-			const newId: number = maxId + 1;
-			data.id = newId;
-			data.createDatetime = '2021-06-06';
-			return { ...state, items: [ data, ...items ], maxId: newId };
+			if (true) {
+				const { data } = action;
+				const newId: number = maxId + 1;
+				data.id = newId;
+				data.createDatetime = '2021-06-06';
+				return { ...state, items: [ data, ...items ], maxId: newId };
+			}
 		case "parametersReducer/deleteParameterItem":
 			const { id } = action;
-			const itemsCopy = [ ...items ];
 			const indexDeletingItem = itemsCopy.findIndex(itemCopy => itemCopy.id === id);
 			itemsCopy.splice(indexDeletingItem, 1);
-			debugger
 			return { ...state, items: itemsCopy };
+		case "parametersReducer/editParameterItem":
+			if (true) {
+				const { data } = action;
+				const indexEditableParameter = itemsCopy.findIndex(itemCopy => itemCopy.id === data.id);
+				if (indexEditableParameter !== -1) itemsCopy[indexEditableParameter] = data;
+				return { ...state, items: itemsCopy };
+			}
 		default:
 			return state;
 	}
