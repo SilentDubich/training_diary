@@ -3,15 +3,17 @@ import Styles from "./reusable-input.module.css";
 
 type PropsType = {
 	value: number | string,
-	updateValue: (value: string) => void,
+	updateValue: (value: any) => void,
 	type: string
 };
 
 export const ReusableInput: FC<PropsType> = ({ updateValue, value, type }) => {
 	const ref = React.createRef<HTMLInputElement>();
 	const changeValue = () => {
-		let value = ref.current?.value;
-		if (!value) value = '';
+		let value: string | undefined | number = ref.current?.value;
+		const isNumberType = type === 'number';
+		// if (!value) value = isNumberType ? 0 : '';
+		if (isNumberType) value = value && +value;
 		updateValue(value);
 	}
 	return (

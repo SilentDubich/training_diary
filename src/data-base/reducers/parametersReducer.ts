@@ -2,15 +2,22 @@ import {AppStateType, InferActionsTypes} from "../store";
 import {ThunkAction} from "redux-thunk";
 
 export const parametersActions = {
-	addParameterItem: () => ({ type: 'parametersReducer/addParameterItem' } as const),
+	addParameterItem: (data: ItemType) => ({ type: 'parametersReducer/addParameterItem', data } as const),
 	deleteParameterItem: (id: number) => ({ type: 'parametersReducer/deleteParameterItem' } as const)
 };
+
 type ParametersActionType = InferActionsTypes<typeof parametersActions>;
 export type ParametersThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ParametersActionType>;
 
+export const addParameterItemThunk = (data: ItemType): ParametersThunkType => {
+	return async (dispatch) => {
+		dispatch(parametersActions.addParameterItem(data));
+	}
+};
+
 export type ItemType = {
-	id: number,
-	createDatetime: string, // Дата создания
+	id?: number,
+	createDatetime?: string | Date, // Дата создания
 	weight: number | null, // Вес
 	percentFat: number | null, // Процент жира
 	percentMuscles: number | null, // Процент мышц
@@ -43,7 +50,8 @@ const parametersDefaultState = {
 			widthHip: 20,
 			widthCaviar: 20
 		}
-	] as Array<ItemType>
+	] as Array<ItemType>,
+	maxId: 0
 };
 
 type ParametersDefaultStateType = typeof parametersDefaultState;
@@ -51,7 +59,14 @@ type ParametersDefaultStateType = typeof parametersDefaultState;
 
 export const parametersReducer = (state = parametersDefaultState, action: ParametersActionType): ParametersDefaultStateType => {
 	switch (action.type) {
+		case "parametersReducer/addParameterItem":
+			const { items, maxId } = state;
+			const { data } = action;
+			const newId: number = maxId + 1;
+			data.id = newId;
+			data.createDatetime = "2021-06-06";
+			return { ...state, items: [ data, ...items ], maxId: newId };
 		default:
-			return state
+			return state;
 	}
 }

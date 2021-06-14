@@ -4,16 +4,17 @@ import {ParametersItem} from "./parameters-item";
 import {AppStateType} from "../../../data-base/store";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {ItemType} from "../../../data-base/reducers/parametersReducer";
+import {addParameterItemThunk, ItemType} from "../../../data-base/reducers/parametersReducer";
 import {Modal} from "../../popup";
 import {ParametersItemAdd} from "./parameters-item-add";
 
 
 type PropsType = {
-	items: Array<ItemType>
+	items: Array<ItemType>,
+	addParameterItemThunk: (data: ItemType) => void
 }
 
-const Parameters: FC<PropsType> = ({items}) => {
+const Parameters: FC<PropsType> = ({items, addParameterItemThunk}) => {
 	const parametersItems = items.map(
 		({
 			 id,
@@ -49,7 +50,7 @@ const Parameters: FC<PropsType> = ({items}) => {
 				widthWaist={widthWaist}
 			/>
 		}
-	)
+	);
 	let [ isAdd, setIsAdd ] = useState<boolean>(false);
 	return (
 		<>
@@ -63,7 +64,7 @@ const Parameters: FC<PropsType> = ({items}) => {
 			{
 				isAdd &&
 				<Modal isShowPopup={setIsAdd}>
-					<ParametersItemAdd setIsAdd={setIsAdd}/>
+					<ParametersItemAdd addParameterItemThunk={addParameterItemThunk} setIsAdd={setIsAdd}/>
 				</Modal>
 			}
 		</>
@@ -77,5 +78,5 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export const ParametersContainer = compose<ComponentType>(
-	connect(mapStateToProps, null)
+	connect(mapStateToProps, { addParameterItemThunk })
 )(Parameters)

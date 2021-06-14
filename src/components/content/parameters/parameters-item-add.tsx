@@ -1,27 +1,48 @@
-import React, {FC, useState} from "react";
+import React, {ComponentType, FC, useState} from "react";
 import Styles from "./parameters-item-add.module.css"
 import {ReusableInput} from "../../reusable/reusable-input";
+import {ItemType} from "../../../data-base/reducers/parametersReducer";
+import {compose} from "redux";
+import {connect} from "react-redux";
 
 
 type PropsType = {
-	setIsAdd: (bool: boolean) => void
+	setIsAdd: (bool: boolean) => void,
+	addParameterItemThunk: (data: ItemType) => void
 }
 
 
-export const ParametersItemAdd: FC<PropsType> = props => {
-	const { setIsAdd } = props;
-	let [ weight, setWeight ] = useState<string>('0');
-	let [ fat, setFat ] = useState<string>('0');
-	let [ muscles, setMuscles ] = useState<string>('0');
-	let [ water, setWater ] = useState<string>('0');
-	let [ widthBelly, setWidthBelly ] = useState<string>('0');
-	let [ widthNeck, setWidthNeck ] = useState<string>('0');
-	let [ widthChest, setWidthChest ] = useState<string>('0');
-	let [ widthWaist, setWidthWaist ] = useState<string>('0');
-	let [ widthForearm, setWidthForearm ] = useState<string>('0');
-	let [ widthBiceps, setWidthBiceps ] = useState<string>('0');
-	let [ widthHip, setWidthHip ] = useState<string>('0');
-	let [ widthCaviar, setWidthCaviar ] = useState<string>('0');
+export const ParametersItemAdd: FC<PropsType> = ({ setIsAdd, addParameterItemThunk }) => {
+	let [ weight, setWeight ] = useState<number>(0);
+	let [ percentFat, setPercentFat ] = useState<number>(0);
+	let [ percentMuscles, setPercentMuscles ] = useState<number>(0);
+	let [ percentWater, setPercentWater ] = useState<number>(0);
+	let [ widthBelly, setWidthBelly ] = useState<number>(0);
+	let [ widthNeck, setWidthNeck ] = useState<number>(0);
+	let [ widthChest, setWidthChest ] = useState<number>(0);
+	let [ widthWaist, setWidthWaist ] = useState<number>(0);
+	let [ widthForearm, setWidthForearm ] = useState<number>(0);
+	let [ widthBiceps, setWidthBiceps ] = useState<number>(0);
+	let [ widthHip, setWidthHip ] = useState<number>(0);
+	let [ widthCaviar, setWidthCaviar ] = useState<number>(0);
+	const saveParameters = () => {
+		const data: ItemType = {
+			weight,
+			percentFat,
+			percentMuscles,
+			percentWater,
+			widthBelly,
+			widthNeck,
+			widthChest,
+			widthWaist,
+			widthForearm,
+			widthBiceps,
+			widthHip,
+			widthCaviar
+		}
+		addParameterItemThunk(data);
+		setIsAdd(false);
+	}
 	return (
 		<div className={`${ Styles.container }`}>
 			<div className={`${ Styles.header }`}>
@@ -36,15 +57,15 @@ export const ParametersItemAdd: FC<PropsType> = props => {
 					</div>
 					<div className={`${ Styles.parameter }`}>
 						<div className={`${ Styles.parameter_title }`}>Жир(%):</div>
-						<ReusableInput value={fat} updateValue={setFat} type={'number'}/>
+						<ReusableInput value={percentFat} updateValue={setPercentFat} type={'number'}/>
 					</div>
 					<div className={`${ Styles.parameter }`}>
 						<div className={`${ Styles.parameter_title }`}>Мышцы(%):</div>
-						<ReusableInput value={muscles} updateValue={setMuscles} type={'number'}/>
+						<ReusableInput value={percentMuscles} updateValue={setPercentMuscles} type={'number'}/>
 					</div>
 					<div className={`${ Styles.parameter }`}>
 						<div className={`${ Styles.parameter_title }`}>Вода(%):</div>
-						<ReusableInput value={water} updateValue={setWater} type={'number'}/>
+						<ReusableInput value={percentWater} updateValue={setPercentWater} type={'number'}/>
 					</div>
 					<div className={`${ Styles.parameter }`}>
 						<div className={`${ Styles.parameter_title }`}>Складка на животе(мм):</div>
@@ -80,7 +101,7 @@ export const ParametersItemAdd: FC<PropsType> = props => {
 					</div>
 				</div>
 				<div className={`${ Styles.save }`}>
-					<div className={`${ Styles.save_btn }`}>Сохранить</div>
+					<div className={`${ Styles.save_btn }`} onClick={saveParameters}>Сохранить</div>
 				</div>
 			</div>
 		</div>
