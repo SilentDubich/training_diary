@@ -1,0 +1,38 @@
+.container {
+	width: 100%;
+	background: #e7e7e7;
+	border: 1px solid #c4c4c4;
+	border-radius: 6px;
+	min-height: 100px;
+	max-height: 200px;
+	box-shadow: 0 0 4px rgba(0, 0, 0, .5);
+	box-sizing: border-box;
+	padding: 0 10px;
+	cursor: pointer;
+	overflow: auto;
+}
+
+.container:hover .delete {
+	display: block;
+}
+
+.datetime {
+	margin: 0 auto 0 0;
+}
+
+.delete {
+	display: none;
+	cursor: pointer;
+}
+
+.delete:hover {
+	text-decoration: underline;
+}
+
+.target {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 30px;
+	min-height: 30px;
+}

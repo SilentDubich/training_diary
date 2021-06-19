@@ -1,6 +1,6 @@
 import React, {ComponentType, FC, useState} from "react";
 import Styles from "./parameters-item.module.css"
-import { ItemType } from "../../../data-base/reducers/parametersReducer";
+import { ItemType } from "../../../data-base/reducers/parameters-reducer";
 import {Modal} from "../../popup";
 import {ParametersItemAdd} from "./parameters-item-add/parameters-item-add";
 

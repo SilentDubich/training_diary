@@ -4,7 +4,7 @@ import {ParametersItem} from "./parameters-item";
 import {AppStateType} from "../../../data-base/store";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {addParameterItemThunk, deleteParameterItemThunk, ItemType} from "../../../data-base/reducers/parametersReducer";
+import {addParameterItemThunk, deleteParameterItemThunk, ItemType} from "../../../data-base/reducers/parameters-reducer";
 import {Modal} from "../../popup";
 import {ParametersItemAdd} from "./parameters-item-add/parameters-item-add";
 
