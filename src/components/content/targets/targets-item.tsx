@@ -1,7 +1,9 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 import {TargetType} from "../../../data-base/reducers/targets-reducer";
 import {declinationNumber} from "../../../data-base/reusable-functions";
 import Styles from "./targets-item.module.css";
+import {Modal} from "../../popup";
+import {TargetsItemAdd} from "./targets-item-add/targets-item-add";
 
 
 type PropsType = {
@@ -30,9 +32,10 @@ export const TargetsItem:FC<PropsType> = ({ data, addTargetThunk, deleteTargetTh
 	const monthText: string = diffMonth ? declinationNumber(diffMonth, [ 'месяц', 'месяца', 'месяцев' ]) : '';
 	const yearText: string = diffYear ? declinationNumber(diffYear, [ 'год', 'года', 'лет' ]) : '';
 	const deadLineText: string = `До конца срока осталось: ${ diffDay ? diffDay : '' } ${ dayText } ${ diffMonth ? diffMonth : '' } ${ monthText } ${ diffYear ? diffYear : '' } ${ yearText }`;
+	let [ isEdit, setIsEdit ] = useState<boolean>(false);
 	return (
 		<>
-			<div className={Styles.container} onClick={() => null}>
+			<div className={Styles.container} onClick={() => setIsEdit(true)}>
 				<div className={Styles.target}>
 					<div className={Styles.parameter_title}>Конечная дата:</div>
 					<div className={Styles.datetime}>{ endDate }</div>
@@ -45,12 +48,12 @@ export const TargetsItem:FC<PropsType> = ({ data, addTargetThunk, deleteTargetTh
 					</div>
 				</div>
 			</div>
-			{/*{*/}
-			{/*	isEdit &&*/}
-			{/*	<Modal isShowPopup={setIsEdit}>*/}
-			{/*		<ParametersItemAdd addParameterItemThunk={addParameterItemThunk} setIsAdd={setIsEdit} mode={"EDIT"} data={data}/>*/}
-			{/*	</Modal>*/}
-			{/*}*/}
+			{
+				isEdit &&
+				<Modal isShowPopup={setIsEdit}>
+					<TargetsItemAdd addTargetThunk={addTargetThunk} setIsAdd={setIsEdit} mode={"EDIT"} data={data}/>
+				</Modal>
+			}
 		</>
 	)
 }

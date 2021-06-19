@@ -57,9 +57,25 @@ const parametersDefaultState = {
 			widthBiceps: 20,
 			widthHip: 20,
 			widthCaviar: 20
+		},
+		{
+			id: 2,
+			createDatetime: '2021-06-06',
+			weight: 78.9,
+			percentFat: 23,
+			percentMuscles: 44,
+			percentWater: 23,
+			widthBelly: 8,
+			widthNeck: 20,
+			widthChest: 20,
+			widthWaist: 20,
+			widthForearm: 20,
+			widthBiceps: 20,
+			widthHip: 20,
+			widthCaviar: 20
 		}
 	] as Array<ItemType>,
-	maxId: 1
+	maxId: 2
 };
 
 type ParametersDefaultStateType = typeof parametersDefaultState;

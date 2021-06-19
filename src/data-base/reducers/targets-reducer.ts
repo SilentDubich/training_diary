@@ -11,7 +11,7 @@ export type TargetType = {
 
 export const targetsActions = {
 	addTargetItem: (data: TargetType) => ({ type: 'targetsReducer/addTarget', data } as const),
-	// editParameterItem: (data: TargetType) => ({ type: 'targetsReducer/editParameterItem', data } as const),
+	editParameterItem: (data: TargetType) => ({ type: 'targetsReducer/editTarget', data } as const),
 	deleteTargetItem: (id: number) => ({ type: 'targetsReducer/deleteTarget', id } as const)
 };
 
@@ -19,9 +19,10 @@ type TargetsActionType = InferActionsTypes<typeof targetsActions>;
 export type TargetsThunkType = ThunkAction<Promise<void>, AppStateType, unknown, TargetsActionType>;
 
 
-export const addTargetThunk = (data: TargetType): TargetsThunkType => {
+export const addTargetThunk = (data: TargetType, mode: 'EDIT' | 'ADD'): TargetsThunkType => {
 	return async (dispatch) => {
-		dispatch(targetsActions.addTargetItem(data));
+		if (mode === 'ADD') dispatch(targetsActions.addTargetItem(data));
+		else if (mode === 'EDIT') dispatch(targetsActions.editParameterItem(data));
 	}
 };
 
@@ -99,6 +100,13 @@ export const targetsReducer = (state = targetsDefaultState, action: TargetsActio
 			const indexDeletingItem = itemsCopy.findIndex(itemCopy => itemCopy.id === id);
 			itemsCopy.splice(indexDeletingItem, 1);
 			return { ...state, items: itemsCopy };
+		case "targetsReducer/editTarget":
+			if (true) {
+				const { data } = action;
+				const indexEditableParameter = itemsCopy.findIndex(itemCopy => itemCopy.id === data.id);
+				if (indexEditableParameter !== -1) itemsCopy[indexEditableParameter] = data;
+				return { ...state, items: itemsCopy };
+			}
 		default:
 			return state;
 	}

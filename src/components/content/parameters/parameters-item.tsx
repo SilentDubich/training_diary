@@ -8,7 +8,6 @@ import {ParametersItemAdd} from "./parameters-item-add/parameters-item-add";
 type PropsType = {
 	deleteParameterItemThunk: (id: number) => void,
 	addParameterItemThunk: (data: ItemType, mode: 'ADD' | 'EDIT') => void
-
 }
 
 export const ParametersItem: FC<ItemType & PropsType> = ({

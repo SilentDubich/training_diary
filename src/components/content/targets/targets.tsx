@@ -33,7 +33,7 @@ export const Targets:FC<PropsType> = ({ targets, addTargetThunk, deleteTargetThu
 			{
 				isAdd &&
 				<Modal isShowPopup={setIsAdd}>
-					<TargetsItemAdd setIsAdd={setIsAdd} />
+					<TargetsItemAdd setIsAdd={setIsAdd} addTargetThunk={addTargetThunk} mode={'ADD'}/>
 				</Modal>
 			}
 		</>
