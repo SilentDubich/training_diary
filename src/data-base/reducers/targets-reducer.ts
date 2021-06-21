@@ -43,7 +43,7 @@ const targetsDefaultState = {
 		},
 		{
 			id: 2,
-			title: 'Похудеть на 5 кг',
+			title: 'Похудеть 5 кг',
 			endDate: '2022-05-18',
 			isCompleted: false
 		},
