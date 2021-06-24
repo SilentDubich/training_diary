@@ -2,11 +2,13 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware from 'redux-thunk'
 import {parametersReducer} from "./reducers/parameters-reducer";
 import {targetsReducer} from "./reducers/targets-reducer";
+import {trainingReducer} from "./reducers/training-reducer";
 
 const allReduces = combineReducers(
 	{
 		parametersReducer,
-		targetsReducer
+		targetsReducer,
+		trainingReducer
 	}
 );
 
