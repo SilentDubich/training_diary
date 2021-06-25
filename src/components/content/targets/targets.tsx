@@ -19,7 +19,7 @@ type PropsType = {
 
 export const Targets:FC<PropsType> = ({ targets, addTargetThunk, deleteTargetThunk }) => {
 	let [ isAdd, setIsAdd ] = useState<boolean>(false);
-	const targetEls = targets.map(target => <TargetsItem data={target} addTargetThunk={addTargetThunk} deleteTargetThunk={deleteTargetThunk}/>);
+	const targetEls = targets.map(target => <TargetsItem key={target.id} data={target} addTargetThunk={addTargetThunk} deleteTargetThunk={deleteTargetThunk}/>);
 	return (
 		<>
 			<div className={Styles.header}>
