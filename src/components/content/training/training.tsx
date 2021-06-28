@@ -18,12 +18,13 @@ import Styles from "../targets/targets.module.css";
 
 type PropsType = {
 	trainings: Array<TrainingType>,
-	addTrainingThunk: () => void
+	addTrainingThunk: () => void,
+	deleteTrainingThunk: (trainingId: number) => void,
 }
 
 
-export const Training:FC<PropsType> = ({ trainings, addTrainingThunk }) => {
-	const trainingItems = trainings.map(training => <TrainingItem key={training.id} training={training}/>);
+export const Training:FC<PropsType> = ({ trainings, addTrainingThunk, deleteTrainingThunk }) => {
+	const trainingItems = trainings.map(training => <TrainingItem key={training.id} training={training} deleteTrainingThunk={deleteTrainingThunk}/>);
 	return (
 		<div>
 			<div className={Styles.header}>
@@ -31,6 +32,7 @@ export const Training:FC<PropsType> = ({ trainings, addTrainingThunk }) => {
 				<div className={Styles.header_add} onClick={() => addTrainingThunk()}>Добавить тренировку</div>
 			</div>
 			<div>
+				{ trainingItems.length === 0 && <div className={Styles.empty_list}>Список пуст</div> }
 				{ trainingItems }
 			</div>
 		</div>
@@ -45,8 +47,8 @@ const mapStateToProps = (state: AppStateType) => {
 	return {
 		trainings: state.trainingReducer.items
 	}
-}
+};
 
 export const TrainingContainer = compose<ComponentType>(
-	connect(mapStateToProps, { addTrainingThunk })
-)(Training)
+	connect(mapStateToProps, { addTrainingThunk, deleteTrainingThunk })
+)(Training);

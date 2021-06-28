@@ -18,3 +18,8 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+.empty_list {
+	text-align: center;
+	font-size: 32px;
+}

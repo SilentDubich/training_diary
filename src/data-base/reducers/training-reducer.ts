@@ -109,7 +109,7 @@ export const trainingReducer = (state = trainingDefaultState, action: TrainingAc
 			if (true) {
 				const { trainingId } = action;
 				const trainingIndex: number = itemsCopy.findIndex(item => item.id === trainingId);
-				if (trainingIndex) itemsCopy.splice(trainingIndex, 1);
+				if (trainingIndex !== -1) itemsCopy.splice(trainingIndex, 1);
 				return { ...state, items: itemsCopy };
 			}
 		case "trainingReducer/deleteApproach":

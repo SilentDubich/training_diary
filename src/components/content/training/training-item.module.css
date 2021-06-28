@@ -29,19 +29,24 @@
 	text-decoration: underline;
 }
 
-.parameters {
+.training {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 }
 
-.parameter {
+.training {
 	display: flex;
 	align-items: center;
+	margin: 0 0 10px 0;
 	height: 30px;
 	min-height: 30px;
 }
 
-.parameter_title {
+.training_title {
 	margin: 0 5px 0 0;
+}
+
+.description {
+	margin: 0 0 10px 0;
 }
