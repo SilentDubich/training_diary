@@ -1,6 +1,7 @@
 import {AppStateType, InferActionsTypes} from "../store";
 import {ThunkAction} from "redux-thunk";
 
+
 export type ApproachType = {
 	title: string | null,
 	order: number,
@@ -10,7 +11,31 @@ export type ApproachType = {
 	repeat: number | null,
 	speed: number | null,
 	time: number | null
-};
+}
+
+// type CardioType = {
+// 	weight: null,
+// 	repeat: null,
+// 	speed: number | null,
+// 	time: number | null
+// }
+//
+// type WorkoutType = {
+// 	weight: number | null,
+// 	repeat: number | null,
+// 	speed: null,
+// 	time: null
+// }
+//
+// export type ApproachType = {
+// 	title: string | null,
+// 	order: number,
+// 	breakBeforeInSec: number | null,
+// 	type: 'CARDIO' | 'WORKOUT' | null,
+// 	params: ReturnParamsType<ty>
+// }
+//
+// type ReturnParamsType<T> = T extends 'CARDIO' ? CardioType : WorkoutType;
 
 export type TrainingType = {
 	id: number,
@@ -54,6 +79,7 @@ export const deleteApproachThunk = (order: number, trainingId: number): Training
 	}
 };
 
+
 const trainingDefaultState = {
 	items: [
 		{
@@ -61,7 +87,18 @@ const trainingDefaultState = {
 			title: 'Пятничная тренировка',
 			datetime: '2021-06-22T10:00:00Z',
 			description: 'Тренировал грудь, бицепсы',
-			approaches: null
+			approaches: [
+				{
+					order: 1,
+					type: 'WORKOUT',
+					title: 'Жим штанги лежа',
+					weight: 100,
+					breakBeforeInSec: 200,
+					time: 0,
+					speed: 0,
+					repeat: 15
+				}
+			]
 		}
 	] as Array<TrainingType>,
 	maxId: 1

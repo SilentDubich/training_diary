@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import {TrainingType} from "../../../data-base/reducers/training-reducer";
 import Styles from "./training-item.module.css"
+import {ApproachItem} from "./approach-item";
 
 
 type PropsType = {
@@ -12,6 +13,7 @@ export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk }) =>
 	const { id, approaches, datetime, description, title } = training;
 	let normalizedDatetime = datetime?.replace('T', ' ');
 	normalizedDatetime = normalizedDatetime?.replace('Z', ' ');
+	const approachEls = approaches?.map(approach => <ApproachItem approach={approach} trainingId={id} />)
 	return (
 		<div className={Styles.container}>
 			<div className={Styles.training}>
@@ -21,6 +23,7 @@ export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk }) =>
 			</div>
 			<div className={Styles.description}>{ description ? `Описание тренировки: ${ description }` : 'Описание отсутствует' }</div>
 			{ !approaches && <div>Подходов нет</div> }
+			{ approaches && approachEls }
 		</div>
 	)
-}
+};
