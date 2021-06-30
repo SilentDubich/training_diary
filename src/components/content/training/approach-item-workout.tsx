@@ -1,16 +1,21 @@
-import React, { FC } from 'react';
+import React, {ComponentType, FC} from 'react';
 import {ApproachType} from '../../../data-base/reducers/training-reducer';
 
 
 
 
 type PropsType = {
-	approach: ApproachType
+	approach: Omit<ApproachType, 'time' | 'speed' | 'type'>
 }
 
 export const ApproachItemWorkout:FC<PropsType> = ({ approach }) => {
-	const { type, repeat, speed, time, breakBeforeInSec, weight, title, order } = approach;
+	const { repeat, breakBeforeInSec, weight, title, order } = approach;
 	return (
-		<div>Workout</div>
+		<div>
+			<div>{ order }-й подход, { title }</div>
+			<div>Время отдыха перед подходом (сек): { breakBeforeInSec }</div>
+			<div>Кол-во повторений: { repeat }</div>
+			<div>Вес (кг): { weight }</div>
+		</div>
 	)
 }

@@ -13,7 +13,7 @@ export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk }) =>
 	const { id, approaches, datetime, description, title } = training;
 	let normalizedDatetime = datetime?.replace('T', ' ');
 	normalizedDatetime = normalizedDatetime?.replace('Z', ' ');
-	const approachEls = approaches?.map(approach => <ApproachItem approach={approach} trainingId={id} />)
+	const approachEls = approaches?.map(approach => <ApproachItem key={approach.order} approach={approach} trainingId={id} />)
 	return (
 		<div className={Styles.container}>
 			<div className={Styles.training}>

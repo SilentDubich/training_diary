@@ -3,12 +3,16 @@ import {ApproachType} from '../../../data-base/reducers/training-reducer';
 
 
 type PropsType = {
-	approach: ApproachType
+	approach: Omit<ApproachType, 'repeat' | 'weight' | 'type' | 'breakBeforeInSec'>
 }
 
 export const ApproachItemCardio:FC<PropsType> = ({ approach }) => {
-	const { type, repeat, speed, time, breakBeforeInSec, weight, title, order } = approach;
+	const { speed, time, title, order } = approach;
 	return (
-		<div>Cardio</div>
+		<div>
+			<div>{ order }-й подход, { title }</div>
+			<div>Время бега: { time }</div>
+			<div>Скорость бега (кг): { speed }</div>
+		</div>
 	)
 }
