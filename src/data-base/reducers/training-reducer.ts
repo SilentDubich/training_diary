@@ -94,10 +94,20 @@ const trainingDefaultState = {
 					title: 'Жим штанги лежа',
 					weight: 100,
 					breakBeforeInSec: 200,
-					time: 0,
-					speed: 0,
+					time: null,
+					speed: null,
 					repeat: 15
-				}
+				},
+				{
+					order: 1,
+					type: 'CARDIO',
+					title: 'Жим штанги лежа',
+					weight: null,
+					breakBeforeInSec: null,
+					time: 63,
+					speed: 8,
+					repeat: null
+				},
 			]
 		}
 	] as Array<TrainingType>,

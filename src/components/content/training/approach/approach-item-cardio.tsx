@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import {ApproachType} from '../../../data-base/reducers/training-reducer';
+import {ApproachType} from '../../../../data-base/reducers/training-reducer';
 
 
 type PropsType = {

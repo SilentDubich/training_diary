@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {TrainingType} from "../../../data-base/reducers/training-reducer";
 import Styles from "./training-item.module.css"
-import {ApproachItem} from "./approach-item";
+import {ApproachItem} from "./approach/approach-item";
 
 
 type PropsType = {
@@ -23,7 +23,9 @@ export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk }) =>
 			</div>
 			<div className={Styles.description}>{ description ? `Описание тренировки: ${ description }` : 'Описание отсутствует' }</div>
 			{ !approaches && <div>Подходов нет</div> }
-			{ approaches && approachEls }
+			<div className={Styles.approaches}>
+				{ approaches && approachEls }
+			</div>
 		</div>
 	)
 };
