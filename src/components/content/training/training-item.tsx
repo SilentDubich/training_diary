@@ -7,13 +7,21 @@ import {ApproachItem} from "./approach/approach-item";
 type PropsType = {
 	training: TrainingType,
 	deleteTrainingThunk: (trainingId: number) => void,
+	deleteApproachThunk: (order: number, trainingId: number) => void,
+	addApproachThunk: (order: number, trainingId: number) => void
 };
 
-export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk }) => {
+export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk, addApproachThunk, deleteApproachThunk }) => {
 	const { id, approaches, datetime, description, title } = training;
 	let normalizedDatetime = datetime?.replace('T', ' ');
 	normalizedDatetime = normalizedDatetime?.replace('Z', ' ');
-	const approachEls = approaches?.map(approach => <ApproachItem key={approach.order} approach={approach} trainingId={id} />)
+	const approachEls = approaches?.map(approach => <ApproachItem
+		addApproachThunk={addApproachThunk}
+		deleteApproachThunk={deleteApproachThunk}
+		key={approach.order * Math.random()}
+		approach={approach}
+		trainingId={id}
+	/>)
 	return (
 		<div className={Styles.container}>
 			<div className={Styles.training}>

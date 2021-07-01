@@ -20,11 +20,19 @@ type PropsType = {
 	trainings: Array<TrainingType>,
 	addTrainingThunk: () => void,
 	deleteTrainingThunk: (trainingId: number) => void,
+	deleteApproachThunk: (order: number, trainingId: number) => void,
+	addApproachThunk: (order: number, trainingId: number) => void
 }
 
 
-export const Training:FC<PropsType> = ({ trainings, addTrainingThunk, deleteTrainingThunk }) => {
-	const trainingItems = trainings.map(training => <TrainingItem key={training.id} training={training} deleteTrainingThunk={deleteTrainingThunk}/>);
+export const Training:FC<PropsType> = ({ trainings, addTrainingThunk, deleteTrainingThunk, addApproachThunk, deleteApproachThunk }) => {
+	const trainingItems = trainings.map(training => <TrainingItem
+		key={training.id}
+		training={training}
+		deleteTrainingThunk={deleteTrainingThunk}
+		addApproachThunk={addApproachThunk}
+		deleteApproachThunk={deleteApproachThunk}
+	/>);
 	return (
 		<div>
 			<div className={Styles.header}>
@@ -50,5 +58,5 @@ const mapStateToProps = (state: AppStateType) => {
 };
 
 export const TrainingContainer = compose<ComponentType>(
-	connect(mapStateToProps, { addTrainingThunk, deleteTrainingThunk })
+	connect(mapStateToProps, { addTrainingThunk, deleteTrainingThunk, addApproachThunk, deleteApproachThunk })
 )(Training);

@@ -7,10 +7,11 @@ import Styles from './approach-item-type.module.css'
 
 type PropsType = {
 	approach: Omit<ApproachType, 'time' | 'speed' | 'type'>,
-	trainingId: number
+	trainingId: number,
+	deleteApproachThunk: (order: number, trainingId: number) => void
 }
 
-export const ApproachItemWorkout:FC<PropsType> = ({ approach, trainingId }) => {
+export const ApproachItemWorkout:FC<PropsType> = ({ approach, trainingId, deleteApproachThunk }) => {
 	const { repeat, breakBeforeInSec, weight, title, order } = approach;
 	return (
 		<div className={Styles.container}>
@@ -20,7 +21,7 @@ export const ApproachItemWorkout:FC<PropsType> = ({ approach, trainingId }) => {
 				<div>Кол-во повторений: { repeat }</div>
 				<div>Вес (кг): { weight }</div>
 			</div>
-			<div className={Styles.delete}>Удалить</div>
+			<div className={Styles.delete} onClick={() => deleteApproachThunk(order, trainingId)}>Удалить</div>
 		</div>
 	)
 }

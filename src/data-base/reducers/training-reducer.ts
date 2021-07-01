@@ -101,7 +101,7 @@ const trainingDefaultState = {
 				{
 					order: 1,
 					type: 'CARDIO',
-					title: 'Жим штанги лежа',
+					title: 'Бег',
 					weight: null,
 					breakBeforeInSec: null,
 					time: 63,
@@ -163,9 +163,13 @@ export const trainingReducer = (state = trainingDefaultState, action: TrainingAc
 			if (true) {
 				const { trainingId, order } = action;
 				const trainingIndex: number = itemsCopy.findIndex(item => item.id === trainingId);
-				if (trainingIndex) {
-					const approachIndex: number | undefined = itemsCopy[trainingIndex].approaches?.findIndex(approach => approach.order === order);
-					if (approachIndex !== -1 && approachIndex !== undefined) itemsCopy[trainingIndex].approaches?.splice(approachIndex, 1);
+				if (trainingIndex !== -1) {
+					const approaches = itemsCopy[trainingIndex].approaches;
+					const approachIndex: number | undefined = approaches?.findIndex(approach => approach.order === order);
+					if (approachIndex !== -1 && approachIndex !== undefined) {
+						approaches?.splice(approachIndex, 1);
+						if (!approaches?.length) itemsCopy[trainingIndex].approaches = null;
+					}
 				}
 				return { ...state, items: itemsCopy }
 			}
