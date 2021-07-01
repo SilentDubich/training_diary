@@ -104,7 +104,7 @@ const trainingDefaultState = {
 					title: 'Бег',
 					weight: null,
 					breakBeforeInSec: null,
-					time: 63,
+					time: null,
 					speed: 8,
 					repeat: null
 				},
