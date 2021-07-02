@@ -21,7 +21,7 @@ type PropsType = {
 	addTrainingThunk: () => void,
 	deleteTrainingThunk: (trainingId: number) => void,
 	deleteApproachThunk: (order: number, trainingId: number) => void,
-	addApproachThunk: (order: number, trainingId: number) => void
+	addApproachThunk: (trainingId: number) => void
 }
 
 

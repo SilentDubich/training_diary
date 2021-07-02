@@ -8,7 +8,11 @@
 }
 
 .approach {
+	width: 100%;
 	margin: 0 15px 0 0;
+	border: 1px solid #000000;
+	padding: 10px;
+	box-sizing: border-box;
 }
 
 .title_container {

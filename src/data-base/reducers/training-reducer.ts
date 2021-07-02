@@ -99,12 +99,12 @@ const trainingDefaultState = {
 					repeat: 15
 				},
 				{
-					order: 1,
+					order: 2,
 					type: 'CARDIO',
 					title: 'Бег',
 					weight: null,
 					breakBeforeInSec: null,
-					time: null,
+					time: 54,
 					speed: 8,
 					repeat: null
 				},
@@ -135,11 +135,11 @@ export const trainingReducer = (state = trainingDefaultState, action: TrainingAc
 				const { trainingId } = action;
 				const trainingIndex: number = itemsCopy.findIndex(item => item.id === trainingId);
 				if (trainingIndex !== -1) {
-					let approaches: Array<ApproachType> | null = itemsCopy[trainingIndex].approaches;
-					if (!approaches) approaches = [];
+					if (!itemsCopy[trainingIndex].approaches) itemsCopy[trainingIndex].approaches = [];
+					let approaches: Array<ApproachType> = itemsCopy[trainingIndex].approaches!;
 					const approachesLength: number = approaches.length;
 					const approach: ApproachType = {
-						order: approachesLength,
+						order: approachesLength + 1,
 						breakBeforeInSec: null,
 						repeat: null,
 						speed: null,
@@ -169,6 +169,7 @@ export const trainingReducer = (state = trainingDefaultState, action: TrainingAc
 					if (approachIndex !== -1 && approachIndex !== undefined) {
 						approaches?.splice(approachIndex, 1);
 						if (!approaches?.length) itemsCopy[trainingIndex].approaches = null;
+						else approaches.forEach(approach => approach.order > 1 && approach.order--);
 					}
 				}
 				return { ...state, items: itemsCopy }

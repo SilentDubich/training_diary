@@ -28,6 +28,17 @@
 	text-decoration: underline;
 }
 
+.add {
+	cursor: pointer;
+	margin: 0 0 15px 0;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.add:hover {
+	text-decoration: underline;
+}
+
 .training {
 	display: flex;
 	align-items: center;

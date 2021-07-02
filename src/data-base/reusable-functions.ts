@@ -9,7 +9,7 @@ export const declinationNumber = (number: number, textForms: Array<string>): str
 };
 
 export const getFullTimeText = (timeInSeconds: number | null): string => {
-	if (!timeInSeconds) return '';
+	if (!timeInSeconds) return 'Время не выставлено';
 	const timeInMin = Math.floor(timeInSeconds / 60);
 	const secondsInFullMin = timeInMin * 60;
 	const seconds = timeInSeconds - secondsInFullMin;
