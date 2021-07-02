@@ -13,30 +13,6 @@ export type ApproachType = {
 	time: number | null
 }
 
-// type CardioType = {
-// 	weight: null,
-// 	repeat: null,
-// 	speed: number | null,
-// 	time: number | null
-// }
-//
-// type WorkoutType = {
-// 	weight: number | null,
-// 	repeat: number | null,
-// 	speed: null,
-// 	time: null
-// }
-//
-// export type ApproachType = {
-// 	title: string | null,
-// 	order: number,
-// 	breakBeforeInSec: number | null,
-// 	type: 'CARDIO' | 'WORKOUT' | null,
-// 	params: ReturnParamsType<ty>
-// }
-//
-// type ReturnParamsType<T> = T extends 'CARDIO' ? CardioType : WorkoutType;
-
 export type TrainingType = {
 	id: number,
 	title: string | null,
@@ -47,10 +23,10 @@ export type TrainingType = {
 
 export const trainingActions = {
 	addTraining: () => ({ type: 'trainingReducer/addTraining' } as const),
-	addApproach: (trainingId: number) => ({ type: 'trainingReducer/addApproach', trainingId } as const),
 	deleteTraining: (trainingId: number) => ({ type: 'trainingReducer/deleteTraining', trainingId } as const),
+	addApproach: (trainingId: number) => ({ type: 'trainingReducer/addApproach', trainingId } as const),
 	deleteApproach: (order: number, trainingId: number) => ({ type: 'trainingReducer/deleteApproach', order, trainingId } as const),
-	updateApproach: (approach: ApproachType) => ({ type: 'trainingReducer/updateApproach', approach } as const)
+	updateApproach: (approach: ApproachType, trainingId: number) => ({ type: 'trainingReducer/updateApproach', approach, trainingId } as const)
 };
 
 type TrainingActionType = InferActionsTypes<typeof trainingActions>;
@@ -80,9 +56,9 @@ export const deleteApproachThunk = (order: number, trainingId: number): Training
 	}
 };
 
-export const updateApproachThunk = (approach: ApproachType): TrainingThunkType => {
+export const updateApproachThunk = (approach: ApproachType, trainingId: number): TrainingThunkType => {
 	return async (dispatch) => {
-		dispatch(trainingActions.updateApproach(approach));
+		dispatch(trainingActions.updateApproach(approach, trainingId));
 	}
 };
 
@@ -114,7 +90,7 @@ const trainingDefaultState = {
 					time: 54,
 					speed: 8,
 					repeat: null
-				},
+				}
 			]
 		}
 	] as Array<TrainingType>,
@@ -181,6 +157,28 @@ export const trainingReducer = (state = trainingDefaultState, action: TrainingAc
 				}
 				return { ...state, items: itemsCopy }
 			}
+		case 'trainingReducer/updateApproach':
+			if (true) {
+				const { approach, trainingId } = action;
+				let { type, order } = approach;
+				const isWorkout = type === 'WORKOUT';
+				const isCardio = type === 'CARDIO';
+				if (isWorkout) {
+					approach.speed = null;
+					approach.time = null;
+				}
+				if (isCardio) {
+					approach.breakBeforeInSec = null;
+					approach.repeat = null;
+					approach.weight = null;
+				}
+				const training = itemsCopy.find(item => item.id === trainingId);
+				if (training) {
+					let approachInTraining: number | undefined = training.approaches?.findIndex(approach => approach.order === order);
+					if (approachInTraining !== -1 && approachInTraining !== undefined) training.approaches![approachInTraining] = approach
+				}
+			}
+			return { ...state, items: itemsCopy }
 		default:
 			return state;
 	}

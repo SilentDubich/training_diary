@@ -8,7 +8,7 @@ type PropsType = {
 	approach: ApproachType,
 	trainingId: number,
 	deleteApproachThunk: (order: number, trainingId: number) => void,
-	updateApproachThunk: (approach: ApproachType) => void
+	updateApproachThunk: (approach: ApproachType, trainingId: number) => void
 }
 
 
@@ -24,7 +24,8 @@ export const ApproachItem:FC<PropsType> = ({ approach, trainingId, deleteApproac
 	const [ editType, setEditType ] = useState<boolean>(false);
 	const updateType = (type: 'WORKOUT' | 'CARDIO') => {
 		approach.type = type;
-		updateApproachThunk(approach);
+		updateApproachThunk(approach, trainingId);
+		setEditType(false);
 	};
 	return (
 		<div className={Styles.container}>
@@ -37,8 +38,8 @@ export const ApproachItem:FC<PropsType> = ({ approach, trainingId, deleteApproac
 				{
 					editType &&
 						<div className={Styles.training_types_container}>
-							<div className={Styles.training_type}>Кардио</div>
-							<div className={Styles.training_type}>Силовая</div>
+							<div className={Styles.training_type} onClick={() => updateType('CARDIO')}>Кардио</div>
+							<div className={Styles.training_type} onClick={() => updateType('WORKOUT')}>Силовая</div>
 						</div>
 				}
 				{ isWorkout && <ApproachItemWorkoutBody approach={approach} /> }

@@ -9,7 +9,7 @@ type PropsType = {
 	deleteTrainingThunk: (trainingId: number) => void,
 	deleteApproachThunk: (order: number, trainingId: number) => void,
 	addApproachThunk: (trainingId: number) => void,
-	updateApproachThunk: (approach: ApproachType) => void
+	updateApproachThunk: (approach: ApproachType, trainingId: number) => void
 };
 
 export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk, addApproachThunk, deleteApproachThunk, updateApproachThunk }) => {
