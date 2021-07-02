@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {addTrainingThunk, TrainingType} from '../../../data-base/reducers/training-reducer';
+import {addTrainingThunk, ApproachType, TrainingType} from '../../../data-base/reducers/training-reducer';
 import Styles from "./training-item.module.css"
 import {ApproachItem} from "./approach/approach-item";
 
@@ -8,15 +8,17 @@ type PropsType = {
 	training: TrainingType,
 	deleteTrainingThunk: (trainingId: number) => void,
 	deleteApproachThunk: (order: number, trainingId: number) => void,
-	addApproachThunk: (trainingId: number) => void
+	addApproachThunk: (trainingId: number) => void,
+	updateApproachThunk: (approach: ApproachType) => void
 };
 
-export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk, addApproachThunk, deleteApproachThunk }) => {
+export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk, addApproachThunk, deleteApproachThunk, updateApproachThunk }) => {
 	const { id, approaches, datetime, description, title } = training;
 	let normalizedDatetime = datetime?.replace('T', ' ');
 	normalizedDatetime = normalizedDatetime?.replace('Z', ' ');
 	const approachEls = approaches?.map(approach => <ApproachItem
 		deleteApproachThunk={deleteApproachThunk}
+		updateApproachThunk={updateApproachThunk}
 		key={approach.order * Math.random()}
 		approach={approach}
 		trainingId={id}

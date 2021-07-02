@@ -49,7 +49,8 @@ export const trainingActions = {
 	addTraining: () => ({ type: 'trainingReducer/addTraining' } as const),
 	addApproach: (trainingId: number) => ({ type: 'trainingReducer/addApproach', trainingId } as const),
 	deleteTraining: (trainingId: number) => ({ type: 'trainingReducer/deleteTraining', trainingId } as const),
-	deleteApproach: (order: number, trainingId: number) => ({ type: 'trainingReducer/deleteApproach', order, trainingId } as const)
+	deleteApproach: (order: number, trainingId: number) => ({ type: 'trainingReducer/deleteApproach', order, trainingId } as const),
+	updateApproach: (approach: ApproachType) => ({ type: 'trainingReducer/updateApproach', approach } as const)
 };
 
 type TrainingActionType = InferActionsTypes<typeof trainingActions>;
@@ -76,6 +77,12 @@ export const deleteTrainingThunk = (trainingId: number): TrainingThunkType => {
 export const deleteApproachThunk = (order: number, trainingId: number): TrainingThunkType => {
 	return async (dispatch) => {
 		dispatch(trainingActions.deleteApproach(order, trainingId));
+	}
+};
+
+export const updateApproachThunk = (approach: ApproachType): TrainingThunkType => {
+	return async (dispatch) => {
+		dispatch(trainingActions.updateApproach(approach));
 	}
 };
 
