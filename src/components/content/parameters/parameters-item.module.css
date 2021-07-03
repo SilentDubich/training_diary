@@ -40,6 +40,7 @@
 	align-items: center;
 	height: 30px;
 	min-height: 30px;
+	margin: 0 5px 0 0;
 }
 
 .parameter_title {

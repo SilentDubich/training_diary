@@ -5,3 +5,12 @@
 	box-sizing: border-box;
 	/*background: #E7E7E7;*/
 }
+
+*,
+*::before,
+*::after,
+:host,
+:host::before,
+:host::after {
+	box-sizing: border-box;
+}

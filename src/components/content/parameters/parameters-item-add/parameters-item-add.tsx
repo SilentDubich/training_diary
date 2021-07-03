@@ -1,6 +1,6 @@
 import React, {ComponentType, FC, useState} from "react";
 import Styles from "./parameters-item-add.module.css"
-import {ReusableInput} from "../../../reusable/reusable-input";
+import {ReusableInput} from "../../../reusable/reusable-input/reusable-input";
 import {ItemType} from "../../../../data-base/reducers/parameters-reducer";
 
 

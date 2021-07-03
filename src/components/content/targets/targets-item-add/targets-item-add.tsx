@@ -1,7 +1,7 @@
 import React, {FC, useState} from "react";
 import Styles from "./targets-item-add.module.css";
 import {TargetType} from "../../../../data-base/reducers/targets-reducer";
-import {ReusableInput} from "../../../reusable/reusable-input";
+import {ReusableInput} from "../../../reusable/reusable-input/reusable-input";
 
 type PropsType = {
 	mode: 'ADD' | 'EDIT',

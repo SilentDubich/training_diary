@@ -14,6 +14,7 @@
 	border: 1px solid #000000;
 	padding: 10px;
 	box-sizing: border-box;
+	position: relative;
 }
 
 .title_container {
@@ -45,11 +46,13 @@
 
 .training_types_container {
 	box-sizing: border-box;
-	border-radius: 12px;
+	border-radius: 0 0 12px 12px;
 	background: #fff;
 	width: 100%;
-	box-shadow: 0 0 4px rgba(0, 0, 0, .16);
+	box-shadow: 0 0 10px rgba(0, 0, 0, .16);
 	overflow: hidden;
+	position: absolute;
+	left: 0;
 }
 
 .training_type {

@@ -15,7 +15,7 @@ export const ApproachItemWorkoutBody:FC<PropsType> = ({ approach }) => {
 	const timeText = getFullTimeText(breakBeforeInSec);
 	return (
 		<div>
-			<div>Время отдыха перед подходом (сек): { timeText }</div>
+			<div>Время отдыха: { timeText }</div>
 			<div>Кол-во повторений: { repeat ? repeat : 0 }</div>
 			<div>Вес (кг): { weight ? weight : 0 }</div>
 		</div>
