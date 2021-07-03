@@ -1,4 +1,4 @@
-import React, {MutableRefObject, RefObject} from 'react';
+import React from 'react';
 import './App.module.css';
 import {Navigation} from "./components/navigation/navigation";
 import {Content} from "./components/content/content";

@@ -44,7 +44,7 @@ export const ApproachItem:FC<PropsType> = ({ approach, trainingId, deleteApproac
 							<div className={Styles.training_type} onClick={() => updateType('WORKOUT')}>Силовая</div>
 						</div>
 				}
-				{ isWorkout && <ApproachItemWorkoutBody approach={approach} /> }
+				{ isWorkout && <ApproachItemWorkoutBody updateApproachThunk={updateApproachThunk} trainingId={trainingId} approach={approach} /> }
 				{ isCardio && <ApproachItemCardioBody approach={approach} /> }
 			</div>
 		</div>

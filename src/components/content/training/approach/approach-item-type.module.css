@@ -68,3 +68,33 @@
 .training_type:hover {
 	background: #f5f5f5;
 }
+
+.item_title {
+	margin: 0 5px 0 0;
+}
+
+.edit_approach {
+	display: flex;
+	align-items: center;
+}
+
+.input {
+	max-width: 100px;
+	min-width: 75px;
+	margin: 0 5px 0 0;
+}
+
+.save {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 12px;
+	background: #190053;
+	color: #ffffff;
+	cursor: pointer;
+	max-width: 100px;
+	min-width: 75px;
+	padding: 0 5px;
+	height: 27px;
+	min-height: 27px;
+}
