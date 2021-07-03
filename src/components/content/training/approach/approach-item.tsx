@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 import {ApproachType} from '../../../../data-base/reducers/training-reducer';
 import {ApproachItemWorkoutBody} from './approach-item-workout-body';
 import {ApproachItemCardioBody} from './approach-item-cardio-body';
@@ -22,6 +22,8 @@ export const ApproachItem:FC<PropsType> = ({ approach, trainingId, deleteApproac
 	};
 	const typeText = !type ? 'Тип не выбран' : typesText[type];
 	const [ editType, setEditType ] = useState<boolean>(false);
+	window.closeFunctions.push({ elemIds: [ 'type', 'types_container' ], callback: setEditType });
+
 	const updateType = (type: 'WORKOUT' | 'CARDIO') => {
 		approach.type = type;
 		updateApproachThunk(approach, trainingId);
@@ -34,10 +36,10 @@ export const ApproachItem:FC<PropsType> = ({ approach, trainingId, deleteApproac
 					<div className={Styles.title}>{ order }-й подход, { title }</div>
 					<div className={Styles.delete} onClick={() => deleteApproachThunk(order, trainingId)}>Удалить</div>
 				</div>
-				<div onClick={() => setEditType(!editType)} className={Styles.type}>Тип тренировки: { typeText }</div>
+				<div id={'type'} onClick={() => setEditType(!editType)} className={Styles.type}>Тип тренировки: { typeText }</div>
 				{
 					editType &&
-						<div className={Styles.training_types_container}>
+						<div id={'types_container'} className={Styles.training_types_container}>
 							<div className={Styles.training_type} onClick={() => updateType('CARDIO')}>Кардио</div>
 							<div className={Styles.training_type} onClick={() => updateType('WORKOUT')}>Силовая</div>
 						</div>
