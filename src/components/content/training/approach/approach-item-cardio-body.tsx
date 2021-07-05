@@ -14,21 +14,10 @@ type PropsType = {
 export const ApproachItemCardioBody:FC<PropsType> = ({ approach, updateApproachThunk, trainingId }) => {
 	const { speed, time } = approach;
 	const timeText = getFullTimeText(time);
-	const [ editSpeed, setEditSpeed ] = useState(false);
-	const [ editableSpeed, setEditableSpeed ] = useState<number>(speed || 0);
-	const updateSpeed = (value: number) => {
-		setEditableSpeed(value);
-	};
-	const saveValue = (value: number, callback: (bool: boolean) => void, field: 'speed' | 'time') => {
-		approach[field] = value;
-		updateApproachThunk(approach, trainingId);
-		callback(false);
-	};
-	window.closeFunctions.push({ elemIds: [ 'edit_speed_container' ], callback: setEditSpeed });
 	return (
 		<div>
 			<div>Время бега: { timeText }</div>
-			<ReusableEditorApproachParam paramTitle={'Скорость бега (км/ч)'} param={speed} approach={approach} updateApproachThunk={updateApproachThunk} trainingId={trainingId} field={'speed' as const} />
+			<ReusableEditorApproachParam id={'edit_speed_container'} paramTitle={'Скорость бега (км/ч)'} param={speed} approach={approach} updateApproachThunk={updateApproachThunk} trainingId={trainingId} field={'speed'} />
 		</div>
 	)
 }

@@ -10,12 +10,13 @@ type PropsType = {
 	approach: ApproachType,
 	updateApproachThunk: (approach: ApproachType, trainingId: number) => void,
 	trainingId: number,
-	field: FieldType
+	field: FieldType,
+	id: string
 };
 
 
 
-export const ReusableEditorApproachParam: FC<PropsType> = ({paramTitle, param, approach, updateApproachThunk, trainingId, field}) => {
+export const ReusableEditorApproachParam: FC<PropsType> = ({paramTitle, param, approach, updateApproachThunk, trainingId, field, id}) => {
 	const [ editableParam, setEditableParam ] = useState<number>(param || 0);
 	const updateParam = (value: number) => {
 		setEditableParam(value);
@@ -27,8 +28,9 @@ export const ReusableEditorApproachParam: FC<PropsType> = ({paramTitle, param, a
 		updateApproachThunk(approach, trainingId);
 		callback(false);
 	};
+	window.closeFunctions.push({ elemIds: [ id ], callback: setEditParam });
 	return (
-		<div id={'edit_speed_container'}>
+		<div id={id}>
 			{ !editParam && <div onClick={() => setEditParam(true)} className={Styles.approach_param}>{ paramTitle }: { param ? param : 0 }</div> }
 			{
 				editParam &&
