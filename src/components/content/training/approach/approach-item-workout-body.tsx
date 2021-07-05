@@ -35,9 +35,9 @@ export const ApproachItemWorkoutBody:FC<PropsType> = ({ approach, updateApproach
 	window.closeFunctions.push({ elemIds: [ 'edit_weight_container' ], callback: setEditWeight });
 	return (
 		<div>
-			<div>Время отдыха: { timeText }</div>
+			<div className={Styles.approach_param}>Время отдыха: { timeText }</div>
 			<div id={'edit_repeat_container'}>
-				{ !editRepeat && <div onClick={() => setEditRepeat(true)}>Кол-во повторений: { repeat ? repeat : 0 }</div> }
+				{ !editRepeat && <div onClick={() => setEditRepeat(true)} className={Styles.approach_param}>Кол-во повторений: { repeat ? repeat : 0 }</div> }
 				{
 					editRepeat &&
 					<div className={Styles.edit_approach}>
@@ -49,7 +49,7 @@ export const ApproachItemWorkoutBody:FC<PropsType> = ({ approach, updateApproach
 				}
 			</div>
 			<div id={'edit_weight_container'}>
-				{ !editWeight && <div onClick={() => setEditWeight(true)}>Вес (кг): { weight ? weight : 0 }</div> }
+				{ !editWeight && <div onClick={() => setEditWeight(true)} className={Styles.approach_param}>Вес (кг): { weight ? weight : 0 }</div> }
 				{
 					editWeight &&
 					<div className={Styles.edit_approach}>
