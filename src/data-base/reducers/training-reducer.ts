@@ -14,6 +14,7 @@ export type ApproachType = {
 }
 
 export type TrainingType = {
+	[index: string]: any,
 	id: number,
 	title: string | null,
 	datetime: string | null,

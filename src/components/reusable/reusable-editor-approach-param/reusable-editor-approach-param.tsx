@@ -3,7 +3,7 @@ import Styles from '../../content/training/approach/approach-item-type.module.cs
 import {ReusableInput} from '../reusable-input/reusable-input';
 import {ApproachType} from '../../../data-base/reducers/training-reducer';
 
-type FieldType = 'title' | 'order' | 'breakBeforeInSec' | 'type' | 'weight' | 'repeat' | 'speed' | 'time';
+type FieldType = 'breakBeforeInSec' | 'weight' | 'repeat' | 'speed' | 'time';
 type PropsType = {
 	paramTitle: string,
 	param: number | null,
@@ -23,7 +23,6 @@ export const ReusableEditorApproachParam: FC<PropsType> = ({paramTitle, param, a
 	};
 	const [ editParam, setEditParam ] = useState<boolean>(false);
 	const saveValue = (value: number, callback: (bool: boolean) => void, field: FieldType) => {
-		// @ts-ignore
 		approach[field] = value;
 		updateApproachThunk(approach, trainingId);
 		callback(false);
