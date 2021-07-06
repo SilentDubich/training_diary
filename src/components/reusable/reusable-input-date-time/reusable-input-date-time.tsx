@@ -33,15 +33,15 @@ export const ReusableInputDateTime: FC<PropsType> = ({}) => {
 	return (
 		<div>
 			<div className={Styles.day_container}>
-				<div onClick={() => setEditDay(!editDay)}>День</div>
+				<div onClick={() => setEditDay(!editDay)}>{ day ? day : 'День'}</div>
 				{ editDay && dayItems }
 			</div>
 			<div className={Styles.day_container}>
-				<div onClick={() => setEditMonth(!editMonth)}>Месяц</div>
+				<div onClick={() => setEditMonth(!editMonth)}>{ month ? month : 'Месяц'}</div>
 				{ editMonth && monthItems }
 			</div>
 			<div className={Styles.day_container}>
-				<div onClick={() => setEditYear(!editMonth)}>Год</div>
+				<div onClick={() => setEditYear(!editYear)}>{ year ? year : 'Год'}</div>
 				{ editYear && yearItems }
 			</div>
 		</div>
