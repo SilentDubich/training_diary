@@ -17,7 +17,6 @@ export const ApproachItemCardioBody:FC<PropsType> = ({ approach, updateApproachT
 		<div>
 			<div>Время бега: { timeText }</div>
 			<ReusableInputDateTime/>
-
 			<ReusableEditorApproachParam
 				id={'edit_speed_container'}
 				paramTitle={'Скорость бега (км/ч)'}
