@@ -3,6 +3,7 @@ import {ApproachType} from '../../../../data-base/reducers/training-reducer';
 import {ApproachItemWorkoutBody} from './approach-item-workout-body';
 import {ApproachItemCardioBody} from './approach-item-cardio-body';
 import Styles from './approach-item-type.module.css';
+import {useEventListener} from '../../../../data-base/reusable-functions';
 
 type PropsType = {
 	approach: ApproachType,
@@ -29,8 +30,10 @@ export const ApproachItem:FC<PropsType> = ({ approach, trainingId, deleteApproac
 		updateApproachThunk(approach, trainingId);
 		setEditType(false);
 	};
+	const ref = React.createRef<HTMLDivElement>();
+	useEventListener(ref, 'click', () => console.log('hello world'), []);
 	return (
-		<div className={Styles.container}>
+		<div ref={ref} className={Styles.container}>
 			<div className={Styles.approach}>
 				<div className={Styles.title_container}>
 					<div className={Styles.title}>{ order }-й подход, { title }</div>

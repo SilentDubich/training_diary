@@ -44,9 +44,9 @@ export const ReusableInputDateTime: FC<PropsType> = ({}) => {
 		'Декабрь'
 	];
 
-	for (let count = 1; count <= dayCount; count++) dayItems.push(<div className={Styles.item} onClick={() => setValue(count, setDay, setEditDay)}>{count}</div>);
-	for (let count = 1; count <= monthCount; count++) monthItems.push(<div className={Styles.item} onClick={() => setValue(count, setMonth, setEditMonth, 'month')}>{months[count]}</div>);
-	for (let count = minYear; count <= maxYear; count++) yearItems.push(<div className={Styles.item} onClick={() => setValue(count, setYear, setEditYear, 'year')}>{count}</div>);
+	for (let count = 1; count <= dayCount; count++) dayItems.push(<div key={count} className={Styles.item} onClick={() => setValue(count, setDay, setEditDay)}>{count}</div>);
+	for (let count = 1; count <= monthCount; count++) monthItems.push(<div key={count} className={Styles.item} onClick={() => setValue(count, setMonth, setEditMonth, 'month')}>{months[count]}</div>);
+	for (let count = minYear; count <= maxYear; count++) yearItems.push(<div key={count} className={Styles.item} onClick={() => setValue(count, setYear, setEditYear, 'year')}>{count}</div>);
 
 	const setValue = (value: number, callback: Dispatch<SetStateAction<number>>, editState: (bool: boolean) => void, type?: 'day' | 'month' | 'year') => {
 		callback(value);

@@ -1,3 +1,5 @@
+import {useEffect} from 'react';
+
 export const declinationNumber = (number: number, textForms: Array<string>): string => {
 	if (number === 0) return textForms[2];
 	number = Math.abs(number) % 100;
@@ -21,5 +23,19 @@ export const getFullTimeText = (timeInSeconds: number | null): string => {
 	const fullText = isEmptyText ? 'Время не выставлено' : isMinutesEmpty ? secondsText : isSecondsEmpty ? minutesText : `${ minutesText } и ${ secondsText }`;
 	return fullText;
 }
+
+export const useEventListener = (target: any, type: 'click' | string, listener: (...args: Array<any>) => any, options = []) => {
+	useEffect(
+		() => {
+			const targetIsRef = target.hasOwnProperty('current');
+			const currentTarget = targetIsRef ? target.current : target;
+			if (currentTarget) currentTarget.addEventListener(type, listener, ...options);
+			return () => {
+				if (currentTarget) currentTarget.removeEventListener(type, listener, ...options);
+			};
+		},
+		[target, type, listener, options]
+	);
+};
 
 

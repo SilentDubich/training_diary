@@ -1,8 +1,9 @@
 import React, {FC, useState} from 'react';
 import {ApproachType} from '../../../../data-base/reducers/training-reducer';
-import {getFullTimeText} from '../../../../data-base/reusable-functions';
+import {getFullTimeText, useEventListener} from '../../../../data-base/reusable-functions';
 import {ReusableEditorApproachParam} from '../../../reusable/reusable-editor-approach-param/reusable-editor-approach-param';
 import {ReusableInputDateTime} from '../../../reusable/reusable-input-date-time/reusable-input-date-time';
+import {log} from 'util';
 
 type PropsType = {
 	approach: ApproachType,
