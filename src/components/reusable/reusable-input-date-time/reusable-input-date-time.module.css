@@ -25,6 +25,15 @@
 	border-right: 1px solid #c4c4c4;
 }
 
+.items::-webkit-scrollbar {
+	width: 5px;
+}
+
+.items::-webkit-scrollbar-thumb {
+	background: #ccc;
+	border-radius: 5px;
+}
+
 .items {
 	height: 200px;
 	overflow: auto;

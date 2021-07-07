@@ -25,6 +25,7 @@ export type TrainingType = {
 export const trainingActions = {
 	addTraining: () => ({ type: 'trainingReducer/addTraining' } as const),
 	deleteTraining: (trainingId: number) => ({ type: 'trainingReducer/deleteTraining', trainingId } as const),
+	updateTraining: (training: TrainingType) => ({ type: 'trainingReducer/updateTraining', training } as const),
 	addApproach: (trainingId: number) => ({ type: 'trainingReducer/addApproach', trainingId } as const),
 	deleteApproach: (order: number, trainingId: number) => ({ type: 'trainingReducer/deleteApproach', order, trainingId } as const),
 	updateApproach: (approach: ApproachType, trainingId: number) => ({ type: 'trainingReducer/updateApproach', approach, trainingId } as const)
@@ -51,6 +52,12 @@ export const deleteTrainingThunk = (trainingId: number): TrainingThunkType => {
 	}
 };
 
+export const updateTrainingThunk = (training: TrainingType): TrainingThunkType => {
+	return async (dispatch) => {
+		dispatch(trainingActions.updateTraining(training));
+	}
+};
+
 export const deleteApproachThunk = (order: number, trainingId: number): TrainingThunkType => {
 	return async (dispatch) => {
 		dispatch(trainingActions.deleteApproach(order, trainingId));
@@ -69,7 +76,7 @@ const trainingDefaultState = {
 		{
 			id: 1,
 			title: 'Пятничная тренировка',
-			datetime: '2021-06-22T10:00:00Z',
+			datetime: '2021-06-22',
 			description: 'Тренировал грудь, бицепсы',
 			approaches: [
 				{
@@ -134,6 +141,14 @@ export const trainingReducer = (state = trainingDefaultState, action: TrainingAc
 					}
 					approaches.push(approach);
 				}
+				return { ...state, items: itemsCopy };
+			}
+		case 'trainingReducer/updateTraining':
+			if (true) {
+				const { training } = action;
+				const { id } = training;
+				const trainingIndex: number = itemsCopy.findIndex(item => item.id === id);
+				if (trainingIndex !== -1) itemsCopy[trainingIndex] = training;
 				return { ...state, items: itemsCopy };
 			}
 		case "trainingReducer/deleteTraining":

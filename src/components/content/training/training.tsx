@@ -8,7 +8,7 @@ import {
 	deleteTrainingThunk,
 	deleteApproachThunk,
 	updateApproachThunk,
-	TrainingType, ApproachType
+	TrainingType, ApproachType, updateTrainingThunk
 } from '../../../data-base/reducers/training-reducer';
 import {TrainingItem} from "./training-item";
 import Styles from "../targets/targets.module.css";
@@ -23,11 +23,12 @@ type PropsType = {
 	deleteTrainingThunk: (trainingId: number) => void,
 	deleteApproachThunk: (order: number, trainingId: number) => void,
 	addApproachThunk: (trainingId: number) => void,
-	updateApproachThunk: (approach: ApproachType) => void
+	updateApproachThunk: (approach: ApproachType) => void,
+	updateTrainingThunk: (training: TrainingType) => void
 }
 
 
-export const Training:FC<PropsType> = ({ trainings, addTrainingThunk, deleteTrainingThunk, addApproachThunk, deleteApproachThunk, updateApproachThunk }) => {
+export const Training:FC<PropsType> = ({ trainings, addTrainingThunk, deleteTrainingThunk, addApproachThunk, deleteApproachThunk, updateApproachThunk, updateTrainingThunk }) => {
 	const trainingItems = trainings.map(training => <TrainingItem
 		key={training.id}
 		training={training}
@@ -35,6 +36,7 @@ export const Training:FC<PropsType> = ({ trainings, addTrainingThunk, deleteTrai
 		deleteTrainingThunk={deleteTrainingThunk}
 		addApproachThunk={addApproachThunk}
 		deleteApproachThunk={deleteApproachThunk}
+		updateTrainingThunk={updateTrainingThunk}
 	/>);
 	return (
 		<div>
@@ -61,5 +63,5 @@ const mapStateToProps = (state: AppStateType) => {
 };
 
 export const TrainingContainer = compose<ComponentType>(
-	connect(mapStateToProps, { addTrainingThunk, deleteTrainingThunk, addApproachThunk, deleteApproachThunk, updateApproachThunk })
+	connect(mapStateToProps, { addTrainingThunk, updateTrainingThunk, deleteTrainingThunk, addApproachThunk, deleteApproachThunk, updateApproachThunk })
 )(Training);

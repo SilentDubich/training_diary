@@ -30,10 +30,8 @@ export const ApproachItem:FC<PropsType> = ({ approach, trainingId, deleteApproac
 		updateApproachThunk(approach, trainingId);
 		setEditType(false);
 	};
-	const ref = React.createRef<HTMLDivElement>();
-	useEventListener(ref, 'click', () => console.log('hello world'), []);
 	return (
-		<div ref={ref} className={Styles.container}>
+		<div className={Styles.container}>
 			<div className={Styles.approach}>
 				<div className={Styles.title_container}>
 					<div className={Styles.title}>{ order }-й подход, { title }</div>

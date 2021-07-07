@@ -44,18 +44,28 @@ export const ReusableInputDateTime: FC<PropsType> = ({}) => {
 		'Декабрь'
 	];
 
-	for (let count = 1; count <= dayCount; count++) dayItems.push(<div key={count} className={Styles.item} onClick={() => setValue(count, setDay, setEditDay)}>{count}</div>);
+	for (let count = 1; count <= dayCount; count++) dayItems.push(<div key={count} className={Styles.item} onClick={() => setValue(count, setDay, setEditDay, 'day')}>{count}</div>);
 	for (let count = 1; count <= monthCount; count++) monthItems.push(<div key={count} className={Styles.item} onClick={() => setValue(count, setMonth, setEditMonth, 'month')}>{months[count]}</div>);
 	for (let count = minYear; count <= maxYear; count++) yearItems.push(<div key={count} className={Styles.item} onClick={() => setValue(count, setYear, setEditYear, 'year')}>{count}</div>);
-
+	const ref = React.createRef<HTMLDivElement>();
 	const setValue = (value: number, callback: Dispatch<SetStateAction<number>>, editState: (bool: boolean) => void, type?: 'day' | 'month' | 'year') => {
 		callback(value);
 		editState(false);
-		const isMonth = type === 'month';
 		const isYear = type === 'year';
+		const isMonth = type === 'month';
+		const isDay = type === 'day';
 		const daysInMonth = new Date(isYear ? value : year, isMonth ? value : month, 0).getDate();
 		setDayCount(daysInMonth);
 		if (daysInMonth < dayCount) setDay(daysInMonth);
+		const dayToSend = isDay ? value : day;
+		const monthToSend = isMonth ? value : month;
+		const yearToSend = isYear ? value : year;
+		ref.current!.dispatchEvent(new CustomEvent('date changed', {
+			bubbles: true,
+			cancelable: true,
+			composed: true,
+			detail: { day: dayToSend, month: monthToSend, year: yearToSend }
+		}));
 	};
 
 	const setEdit = (value: boolean, type: 'day' | 'month' | 'year', editState: (bool: boolean) => void) => {
@@ -65,7 +75,7 @@ export const ReusableInputDateTime: FC<PropsType> = ({}) => {
 		editState(value);
 	};
 	return (
-		<div className={Styles.date_container}>
+		<div ref={ref} className={Styles.date_container}>
 			<div className={Styles.day_container}>
 				<div className={Styles.item} onClick={() => setEdit(!editDay, 'day', setEditDay)}>{ day ? day : 'День'}</div>
 				{ editDay && <div className={Styles.items}>{ dayItems }</div> }
