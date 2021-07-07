@@ -60,7 +60,7 @@ export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk, addA
 				{
 					editTime &&
 					<div className={Styles.datetime}>
-						<ReusableInputDateTime></ReusableInputDateTime>
+						<ReusableInputDateTime dayValue={day} monthValue={month} yearValue={year}></ReusableInputDateTime>
 						<div onClick={() => saveDate()}>Сохранить</div>
 					</div>
 				}

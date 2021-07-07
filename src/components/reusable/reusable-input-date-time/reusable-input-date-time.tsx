@@ -1,24 +1,41 @@
-import React, {Dispatch, FC, SetStateAction, useState} from 'react';
+import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react';
 import Styles from './reusable-input-date-time.module.css';
 
 
 type PropsType = {
-
+	dayValue: number,
+	monthValue: number,
+	yearValue: number
 };
 
 
-export const ReusableInputDateTime: FC<PropsType> = ({}) => {
-	const [ day, setDay ] = useState<number>(1);
-	const [ dayCount, setDayCount ] = useState<number>(31);
+export const ReusableInputDateTime: FC<PropsType> = ({ dayValue, monthValue, yearValue }) => {
+	const checkDaysCount = (month: number, year: number) => {
+		const daysInMonth = new Date(year, month, 0).getDate();
+		setDayCount(daysInMonth);
+		if (daysInMonth < day) {
+			setDay(daysInMonth);
+			return daysInMonth;
+		}
+		return null;
+	};
+	const [ dayCount, setDayCount ] = useState<number>(0);
+	useEffect(() => {
+		const daysInMonth = new Date(year, month, 0).getDate();
+		setDayCount(daysInMonth);
+		if (daysInMonth < day) setDay(daysInMonth);
+	}, [dayCount === 0])
+	;
+	const [ day, setDay ] = useState<number>(dayValue ? dayValue : 1);
+	const [ month, setMonth ] = useState<number>(monthValue ? monthValue : 1);
 
-	const [ month, setMonth ] = useState<number>(1);
 	const monthCount = 12;
 
 	const yearCount: number = 25;
 	const currentYear: number = new Date().getFullYear();
 	const minYear: number = currentYear - yearCount;
 	const maxYear: number = currentYear + yearCount;
-	const [ year, setYear ] = useState<number>(currentYear);
+	const [ year, setYear ] = useState<number>(yearValue ? yearValue : currentYear);
 
 	const [ editDay, setEditDay ] = useState<boolean>(false);
 	const [ editMonth, setEditMonth ] = useState<boolean>(false);
@@ -54,12 +71,11 @@ export const ReusableInputDateTime: FC<PropsType> = ({}) => {
 		const isYear = type === 'year';
 		const isMonth = type === 'month';
 		const isDay = type === 'day';
-		const daysInMonth = new Date(isYear ? value : year, isMonth ? value : month, 0).getDate();
-		setDayCount(daysInMonth);
-		if (daysInMonth < dayCount) setDay(daysInMonth);
-		const dayToSend = isDay ? value : day;
+		let dayToSend = isDay ? value : day;
 		const monthToSend = isMonth ? value : month;
 		const yearToSend = isYear ? value : year;
+		const checkDaysResult: number | null = checkDaysCount(monthToSend, yearToSend);
+		if (checkDaysResult) dayToSend = checkDaysResult;
 		ref.current!.dispatchEvent(new CustomEvent('date changed', {
 			bubbles: true,
 			cancelable: true,
@@ -74,6 +90,7 @@ export const ReusableInputDateTime: FC<PropsType> = ({}) => {
 		if (type !== 'year') setEditYear(false);
 		editState(value);
 	};
+
 	return (
 		<div ref={ref} className={Styles.date_container}>
 			<div className={Styles.day_container}>

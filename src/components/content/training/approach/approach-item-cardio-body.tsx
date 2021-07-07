@@ -2,8 +2,6 @@ import React, {FC, useState} from 'react';
 import {ApproachType} from '../../../../data-base/reducers/training-reducer';
 import {getFullTimeText, useEventListener} from '../../../../data-base/reusable-functions';
 import {ReusableEditorApproachParam} from '../../../reusable/reusable-editor-approach-param/reusable-editor-approach-param';
-import {ReusableInputDateTime} from '../../../reusable/reusable-input-date-time/reusable-input-date-time';
-import {log} from 'util';
 
 type PropsType = {
 	approach: ApproachType,
@@ -17,7 +15,6 @@ export const ApproachItemCardioBody:FC<PropsType> = ({ approach, updateApproachT
 	return (
 		<div>
 			<div>Время бега: { timeText }</div>
-			<ReusableInputDateTime/>
 			<ReusableEditorApproachParam
 				id={'edit_speed_container'}
 				paramTitle={'Скорость бега (км/ч)'}
