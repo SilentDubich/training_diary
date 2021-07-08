@@ -7,7 +7,7 @@ import {
 } from '../../../data-base/reducers/training-reducer';
 import Styles from "./training-item.module.css"
 import {ApproachItem} from "./approach/approach-item";
-import {ReusableInputDateTime} from '../../reusable/reusable-input-date-time/reusable-input-date-time';
+import {ReusableInputDate} from '../../reusable/reusable-input-date-time/reusable-input-date';
 import {useEventListener} from '../../../data-base/reusable-functions';
 
 
@@ -60,7 +60,7 @@ export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk, addA
 				{
 					editTime &&
 					<div className={Styles.datetime}>
-						<ReusableInputDateTime dayValue={day} monthValue={month} yearValue={year}></ReusableInputDateTime>
+						<ReusableInputDate dayValue={day} monthValue={month} yearValue={year}></ReusableInputDate>
 						<div onClick={() => saveDate()}>Сохранить</div>
 					</div>
 				}
