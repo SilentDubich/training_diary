@@ -15,13 +15,71 @@ export const getFullTimeText = (timeInSeconds: number | null): string => {
 	const timeInMin = Math.floor(timeInSeconds / 60);
 	const secondsInFullMin = timeInMin * 60;
 	const seconds = timeInSeconds - secondsInFullMin;
-	const minutesText = timeInMin !== 0 ? `${ timeInMin } ${ declinationNumber(timeInMin, [ 'минута', 'минуты', 'минут' ]) }` : '';
+	const hours = Math.floor(timeInMin / 60);
+	const minutesInHours = hours * 60;
+	const remainsMinutes = timeInMin - minutesInHours;
+
+	const hoursText = hours !== 0 ? `${ hours } ${ declinationNumber(hours, [ 'час', 'часа', 'часов' ]) }` : '';
+	const minutesText = remainsMinutes !== 0 ? `${ remainsMinutes } ${ declinationNumber(remainsMinutes, [ 'минута', 'минуты', 'минут' ]) }` : '';
 	const secondsText = seconds !== 0 ? `${ seconds } ${ declinationNumber(seconds, [ 'секунда', 'секунды', 'секунд' ]) }` : '';
+	const isHoursEmpty = !hoursText;
 	const isMinutesEmpty = !minutesText;
 	const isSecondsEmpty = !secondsText;
-	const isEmptyText = isMinutesEmpty && isSecondsEmpty;
-	const fullText = isEmptyText ? 'Время не выставлено' : isMinutesEmpty ? secondsText : isSecondsEmpty ? minutesText : `${ minutesText } и ${ secondsText }`;
+
+	const isEmpty = isMinutesEmpty && isSecondsEmpty && isHoursEmpty;
+	const isEmptyText = 'Время не выставлено';
+
+	const isFullText = !isHoursEmpty && !isMinutesEmpty && !isSecondsEmpty;
+	const fullTextVariant = `${ hoursText }, ${ minutesText } и ${ secondsText }`;
+
+
+	const withoutSeconds = !isHoursEmpty && !isMinutesEmpty && isSecondsEmpty;
+	const withoutSecondsText = `${ hoursText } и ${ minutesText }`;
+
+	const withoutMinutes = !isHoursEmpty && isMinutesEmpty && !isSecondsEmpty;
+	const withoutMinutesText = `${ hoursText } и ${ secondsText }`;
+
+	const withoutHours = isHoursEmpty && !isMinutesEmpty && !isSecondsEmpty;
+	const withoutHoursText = `${ minutesText } и ${ secondsText }`;
+
+
+	const withoutSecondsAndMinutes = !isHoursEmpty && isMinutesEmpty && isSecondsEmpty;
+	const withoutSecondsAndMinutesText = `${ hoursText }`;
+
+	const withoutHoursAndSeconds = isHoursEmpty && !isMinutesEmpty && isSecondsEmpty;
+	const withoutHoursAndSecondsText = `${ minutesText }`;
+
+	const withoutHoursAndMinutes = isHoursEmpty && isMinutesEmpty && !isSecondsEmpty;
+	const withoutHoursAndMinutesText = `${ secondsText }`;
+
+
+	const fullText =
+		isEmpty ? isEmptyText :
+			isFullText ? fullTextVariant :
+				withoutSeconds ? withoutSecondsText :
+					withoutMinutes ? withoutMinutesText :
+						withoutSecondsAndMinutes ? withoutSecondsAndMinutesText :
+							withoutHours ? withoutHoursText :
+								withoutHoursAndSeconds ? withoutHoursAndSecondsText :
+									withoutHoursAndMinutes ? withoutHoursAndMinutesText : isEmptyText;
 	return fullText;
+};
+
+export const secondsToTime = (seconds: number | null): [ hours: number, minutes: number, seconds: number ] => {
+	if (!seconds) return [ 0, 0, 0 ];
+	const minutes = Math.floor(seconds / 60);
+	const secondsInMinutes = minutes * 60;
+	const remainsSeconds = seconds - secondsInMinutes;
+	const hours = Math.floor(minutes / 60);
+	const minutesInHours = hours * 60;
+	const remainsMinutes = minutes - minutesInHours;
+	return [ hours, remainsMinutes, remainsSeconds ];
+};
+
+export const timeToSeconds = (hours: number, minutes: number, seconds: number): number => {
+	const minutesToSeconds = minutes * 60;
+	const hoursInSeconds = hours * (60 ** 2);
+	return seconds + minutesToSeconds + hoursInSeconds;
 }
 
 export const useEventListener = (target: any, type: 'click' | string, listener: (...args: Array<any>) => any, options = []) => {

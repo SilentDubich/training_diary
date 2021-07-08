@@ -36,7 +36,7 @@ export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk, addA
 		trainingId={id}
 	/>);
 
-	const [ editTime, setEditTme ] = useState<boolean>(false);
+	const [ editTime, setEditTime ] = useState<boolean>(false);
 	const ref = React.createRef<any>();
 	useEventListener(ref, 'date changed', e => updateDate(e.detail));
 	const updateDate = (detail: { day: number, month: number, year: number }) => {
@@ -50,13 +50,13 @@ export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk, addA
 		const monthToSend = month < 10 ? `0${ month }` : month;
 		training.datetime = `${ year }-${ monthToSend }-${ dayToSend }`;
 		updateTrainingThunk(training);
-		setEditTme(false)
+		setEditTime(false);
 	};
 	return (
 		<div ref={ref} className={Styles.container}>
 			<div className={Styles.training}>
 				<div className={Styles.training_title}>{ title ? title : 'Без названия' }</div>
-				{ !editTime && <div className={Styles.datetime} onClick={() => setEditTme(true)}>{datetime}</div> }
+				{ !editTime && <div className={Styles.datetime} onClick={() => setEditTime(true)}>{datetime}</div> }
 				{
 					editTime &&
 					<div className={Styles.datetime}>
