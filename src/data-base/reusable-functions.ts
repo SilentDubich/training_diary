@@ -53,16 +53,17 @@ export const getFullTimeText = (timeInSeconds: number | null): string => {
 	const withoutHoursAndMinutesText = `${ secondsText }`;
 
 
-	const fullText =
-		isEmpty ? isEmptyText :
-			isFullText ? fullTextVariant :
-				withoutSeconds ? withoutSecondsText :
-					withoutMinutes ? withoutMinutesText :
-						withoutSecondsAndMinutes ? withoutSecondsAndMinutesText :
-							withoutHours ? withoutHoursText :
-								withoutHoursAndSeconds ? withoutHoursAndSecondsText :
-									withoutHoursAndMinutes ? withoutHoursAndMinutesText : isEmptyText;
-	return fullText;
+	switch (true) {
+		case isEmpty: return isEmptyText;
+		case isFullText: return fullTextVariant;
+		case withoutSeconds: return withoutSecondsText;
+		case withoutMinutes: return withoutMinutesText;
+		case withoutSecondsAndMinutes: return withoutSecondsAndMinutesText;
+		case withoutHours: return withoutHoursText;
+		case withoutHoursAndSeconds: return withoutHoursAndSecondsText;
+		case withoutHoursAndMinutes: return withoutHoursAndMinutesText;
+		default: return isEmptyText;
+	}
 };
 
 export const secondsToTime = (seconds: number | null): [ hours: number, minutes: number, seconds: number ] => {
