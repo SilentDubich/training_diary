@@ -1,9 +1,7 @@
 import React, {FC, ReactNode, RefObject, useState} from 'react';
 import {
-	addTrainingThunk,
 	ApproachType,
-	TrainingType,
-	updateTrainingThunk
+	TrainingType
 } from '../../../data-base/reducers/training-reducer';
 import Styles from "./training-item.module.css"
 import {ApproachItem} from "./approach/approach-item";
@@ -20,7 +18,7 @@ type PropsType = {
 	updateTrainingThunk: (training: TrainingType) => void
 };
 
-export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk, addApproachThunk, deleteApproachThunk, updateApproachThunk }) => {
+export const TrainingItem:FC<PropsType> = ({ training, deleteTrainingThunk, addApproachThunk, deleteApproachThunk, updateApproachThunk, updateTrainingThunk }) => {
 	const { id, approaches, datetime, description, title } = training;
 	const dateParts = datetime ? datetime.split('-') : null;
 

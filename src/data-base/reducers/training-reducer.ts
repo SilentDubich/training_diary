@@ -1,5 +1,6 @@
 import {AppStateType, InferActionsTypes} from "../store";
 import {ThunkAction} from "redux-thunk";
+import {api} from '../api';
 
 
 export type ApproachType = {
@@ -54,6 +55,7 @@ export const deleteTrainingThunk = (trainingId: number): TrainingThunkType => {
 
 export const updateTrainingThunk = (training: TrainingType): TrainingThunkType => {
 	return async (dispatch) => {
+		await api.updateTrainings(training);
 		dispatch(trainingActions.updateTraining(training));
 	}
 };
