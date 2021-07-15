@@ -12,10 +12,9 @@ export type ApproachType = {
 	repeat: number | null,
 	speed: number | null,
 	time: number | null
-}
+};
 
 export type TrainingType = {
-	[index: string]: any,
 	id: number,
 	title: string | null,
 	datetime: string | null,
