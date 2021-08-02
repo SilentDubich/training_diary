@@ -24,6 +24,7 @@ export type TrainingType = {
 
 export const trainingActions = {
 	addTraining: () => ({ type: 'trainingReducer/addTraining' } as const),
+	setTrainings: (trainings: Array<TrainingType>) => ({ type: 'trainingReducer/setTrainings', trainings } as const),
 	deleteTraining: (trainingId: number) => ({ type: 'trainingReducer/deleteTraining', trainingId } as const),
 	updateTraining: (training: TrainingType) => ({ type: 'trainingReducer/updateTraining', training } as const),
 	addApproach: (trainingId: number) => ({ type: 'trainingReducer/addApproach', trainingId } as const),
@@ -36,7 +37,16 @@ export type TrainingThunkType = ThunkAction<Promise<void>, AppStateType, unknown
 
 export const addTrainingThunk = (): TrainingThunkType => {
 	return async (dispatch) => {
+		const data = await api.getTrainings();
+		debugger
 		dispatch(trainingActions.addTraining());
+	}
+};
+
+export const setTrainingsThunk = (): TrainingThunkType => {
+	return async (dispatch) => {
+		const trainings: Array<TrainingType> = await api.getTrainings();
+		dispatch(trainingActions.setTrainings(trainings));
 	}
 };
 

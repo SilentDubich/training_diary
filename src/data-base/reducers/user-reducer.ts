@@ -1,5 +1,6 @@
 import {AppStateType, InferActionsTypes} from "../store";
 import {ThunkAction} from "redux-thunk";
+import {api} from '../api';
 
 
 export type UserType = {
@@ -14,22 +15,21 @@ type UserActionType = InferActionsTypes<typeof userActions>;
 export type UserThunkType = ThunkAction<Promise<void>, AppStateType, unknown, UserActionType>;
 
 
-export const setUserThunk = (data: UserType): UserThunkType => {
+export const getUserThunk = (): UserThunkType => {
 	return async (dispatch) => {
-		dispatch(userActions.setUser(data));
+		// const data: UserType = await api.getUserDate();
+		// dispatch(userActions.setUser(data));
 	}
 };
 
-const usersDefaultState = {
-	items: [] as Array<UserType>
-}
+const userDefaultState = {} as UserType;
 
-type UsersDefaultStateType = typeof usersDefaultState;
+type UserDefaultStateType = typeof userDefaultState;
 
-export const trainingReducer = (state = usersDefaultState, action: UserActionType): UsersDefaultStateType => {
-	const { items } = state;
-	const itemsCopy = [ ...items ];
+export const trainingReducer = (state = userDefaultState, action: UserActionType): UserDefaultStateType => {
 	switch (action.type) {
+		case 'userReducer/setUser':
+			return { ...action.data };
 		default:
 			return state;
 	}

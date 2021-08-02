@@ -1,21 +1,27 @@
 import axios from "axios";
 import {TrainingType} from './reducers/training-reducer';
+import {UserType} from './reducers/user-reducer';
 
 
 const instance = axios.create({
-	// baseURL: 'https://pacific-cliffs-94918.herokuapp.com/',
-	headers: {
-		'Content-Type': 'application/json',
-		'X-Requested-With': 'XMLHttpRequest'
-	},
 	withCredentials: true,
 	baseURL: 'http://localhost:5000/'
 });
 
 export const api = {
+	addTraining() {
+		return instance.post('trainings').then(data => data);
+	},
 	updateTrainings(trainings: TrainingType) {
-		return instance.post('user', trainings).then(data => {
+		return instance.post('trainings', trainings).then(data => {
 			console.log(data);
 		});
+	},
+	getTrainings() {
+		return instance.get('trainings').then((data) => {
+			const res = data.data;
+			const rows = res.rows;
+			return data.data
+		});
 	}
-}
+};
